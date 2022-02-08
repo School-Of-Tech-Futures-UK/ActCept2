@@ -1,6 +1,7 @@
 ## ActCept2
-
+```
 git clone git@github.com:School-Of-Tech-Futures-UK/ActCept2.git
+```
 
 ## Make a change:
 git add .
