@@ -1,20 +1,21 @@
 import './App.css';
-import NavigationBar from "./components/nav";
+import NavigationBar from "./Components/nav";
 // import BrowserRouter from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";
+import Home from './Components/home';
+import Review from './Components/review';
 
-const {BrowserRouter, Route, Routes} = reactRouterDom;
+const { BrowserRouter, Route, Routes } = reactRouterDom;
 
 function App() {
   return (
     <BrowserRouter>
-    <NavigationBar />
-  <Routes>
-    <Route path="/about" render={() => (<h1>About</h1>)} />
-    <Route path="/blog" render={() => (<h1>Blog</h1>)} />
-    <Route path="/" render={() => (<h1>Home</h1>)} />
-  </Routes>
-  </BrowserRouter>
+      <NavigationBar />
+      <Routes>
+        <Route path="/events" element={<Home />} />
+        <Route path="/" element={<Review />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
