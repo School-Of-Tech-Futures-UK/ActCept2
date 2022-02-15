@@ -1,0 +1,22 @@
+version: "3" 
+services:
+  server:
+    build: ./actcept
+    container_name: "actcept_container"
+    # depends_on:
+    #   - database
+    ports:
+      - 3000:3000
+    # environment:
+    #   - DB_HOSTNAME=my-postgres
+    #   - DB_PASSWORD=mysecretpassword
+  # database:
+  #   image: postgres:latest
+  #   container_name: my-postgres
+  #   environment:
+  #     - POSTGRES_PASSWORD=mysecretpassword
+  #   ports:
+  #     - 5432:5432
+  
+
+# docker run --name my-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
