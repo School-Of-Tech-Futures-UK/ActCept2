@@ -6,7 +6,7 @@ COPY /src/api/api.js /app/
 
 RUN cd /app && npm install
 
-RUN cd /app && npm install cors
+RUN cd /app && npm install cors pg-promise
 
 EXPOSE 3000
 
