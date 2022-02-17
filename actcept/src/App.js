@@ -1,9 +1,9 @@
 import './App.css';
-import NavigationBar from "./Components/nav";
+import NavigationBar from "./components/nav";
 // import BrowserRouter from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";
-import Home from './Components/home';
-import Review from './Components/review';
+import Home from './components/home';
+import Review from './components/review';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
