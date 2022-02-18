@@ -33,7 +33,7 @@ class ActceptCdkStack extends Stack {
           `${myBucket.bucketArn}/*`        ],
         conditions: {
           "IpAddress": {
-            "aws:SourceIp": "90.192.212.232"          }
+            "aws:SourceIp": "80.192.142.215"          }
         }
       }),
     );

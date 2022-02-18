@@ -4,6 +4,7 @@ import NavigationBar from "./components/nav";
 import * as reactRouterDom from "react-router-dom";
 import Home from './components/home';
 import Review from './components/review';
+import Event from './components/event';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
@@ -12,8 +13,9 @@ function App() {
     <BrowserRouter>
       <NavigationBar />
       <Routes>
-        <Route path="/events" element={<Home />} />
-        <Route path="/" element={<Review />} />
+        <Route path="/events" element={<Event />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/reviews" element={<Review />} />
       </Routes>
     </BrowserRouter>
   );

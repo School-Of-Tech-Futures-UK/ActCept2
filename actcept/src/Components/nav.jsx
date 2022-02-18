@@ -4,14 +4,17 @@ import { NavLink, useLocation } from "react-router-dom";
 
 const NavigationBar = () => {
   // For illustration
-  const { pathname } = useLocation();
+  //const { pathname } = useLocation();
 
   return (
+    // <label>{pathname}</label>
     <>
-      <label>{pathname}</label>
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/events">Events</NavLink>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><b> ActCept </b>| Part of GigStr</a>
+          <NavLink class="navbar-brand" to="/reviews">Review</NavLink>
+          <NavLink class="navbar-brand" to="/events">Events</NavLink>
+        </div>
       </nav>
     </>
   );
