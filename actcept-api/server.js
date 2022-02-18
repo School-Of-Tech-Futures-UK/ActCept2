@@ -27,6 +27,9 @@ app.get('/pupils/:id', async (req, res) => {
 })
 
 
+app.get('/events', async (req, res) => {
+  const event = await
+})
 
 app.listen(3001, () => console.log('started'));
 

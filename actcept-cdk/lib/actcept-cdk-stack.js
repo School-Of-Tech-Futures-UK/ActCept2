@@ -33,13 +33,13 @@ class ActceptCdkStack extends Stack {
           `${myBucket.bucketArn}/*`        ],
         conditions: {
           "IpAddress": {
-            "aws:SourceIp": "80.192.142.215"          }
+            "aws:SourceIp": "90.192.212.232"          }
         }
       }),
     );
 
     new s3deploy.BucketDeployment(this, 'DeployWebsite', {
-      sources: [s3deploy.Source.asset('../client')],
+      sources: [s3deploy.Source.asset('../actcept/build')],
       destinationBucket: myBucket,
     });
 
