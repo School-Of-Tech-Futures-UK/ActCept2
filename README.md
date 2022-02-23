@@ -29,9 +29,18 @@ npm install
 npm run build
 ```
 
-## Start the app
+## Start the app locally
 
 ```
 cd actcept
 npm start
+```
+
+## Deploy to AWS
+
+```
+cd actcept-cdk
+npm install
+aws-azure-login --profile aal-profile --mode debug
+cdk deploy --profile aal-profile 
 ```

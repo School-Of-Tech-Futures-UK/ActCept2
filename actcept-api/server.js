@@ -21,15 +21,23 @@ app.get('/fruits', (req, res) => {
 })
 
 
-app.get('/pupils/:id', async (req, res) => {
-  const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
-  res.send(person);
-})
-
-
 app.get('/events', async (req, res) => {
-  const event = await
+  // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
+  const events = await db.query ('SELECT * FROM events')
+  res.send(events);
 })
+
+// app.get('/events', (req, res) => {
+//   // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
+//   const events = 'hello'
+//   console.log('')
+//   res.send(events);
+// })
+
+
+// app.get('/events', async (req, res) => {
+//   const event = await
+// })
 
 app.listen(3001, () => console.log('started'));
 

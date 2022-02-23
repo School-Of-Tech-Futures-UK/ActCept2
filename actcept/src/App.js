@@ -1,10 +1,10 @@
 import './App.css';
-import NavigationBar from "./components/nav";
+import NavigationBar from "./Components/nav";
 // import BrowserRouter from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";
-import Home from './components/home';
-import Review from './components/review';
-import Event from './components/event';
+import Home from './Components/home';
+import Review from './Components/review';
+import Event from './Components/event';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 

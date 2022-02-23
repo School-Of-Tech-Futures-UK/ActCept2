@@ -23,8 +23,8 @@ const Event = ({event}) => {
           <div class="card" style={{width: '18rem'}}>
             <img src="https://www.accenture.com/t00010101T000000Z__w__/gb-en/_acnmedia/Accenture/Redesign-Assets/Careers/Images/Marquee/8/Accenture-in-session-marquee.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">{event.name}</h5>
-              <p class="card-text">{event.artist} at {event.location} <br/> {event.date}</p>
+              <h5 class="card-title">{event.event_name}</h5>
+              <p class="card-text">{event.artist_name} at {event.location} <br/> {event.date}</p>
               <a href="/" class="btn btn-primary">Sign up now </a>
             </div>
           </div>
