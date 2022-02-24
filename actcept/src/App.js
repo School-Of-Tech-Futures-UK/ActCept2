@@ -4,7 +4,7 @@ import NavigationBar from "./Components/nav";
 import * as reactRouterDom from "react-router-dom";
 import Home from './Components/home';
 import Review from './Components/review';
-import Event from './Components/event';
+import Event from './Components/event_page';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
