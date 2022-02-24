@@ -22,6 +22,11 @@ services:
       - DB_HOSTNAME=myTestPostgres2
       - DB_PASSWORD=mysecretpassword
 
+       # - database
+   # environment:
+     # - DB_HOSTNAME=gigstr
+     # - DB_PASSWORD=gigstr
+
   database:
     image: postgres:latest
     container_name: myTestPostgres2
@@ -29,5 +34,13 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
     ports:
       - 5432:5432
+
+  #database:
+    #image: khaashifriaz/gigstr:gigtag   
+    #container_name: "gigstr-db-container"
+    #environment:
+      #- POSTGRES_PASSWORD=gigstr
+    #ports:
+      #- 5432:5432
 
 # docker run --name my-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres

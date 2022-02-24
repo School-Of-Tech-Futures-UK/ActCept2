@@ -13,7 +13,9 @@ const Home = () => {
         <div class="bgImage">
             <h1> Welcome to ActCept </h1>
             <p> See through the crowd and find your perfect event</p>
-            <ShowEvents events={events}/>
+            <div class="eventWrapper">
+                <ShowEvents events={events}/>
+            </div>
         </div>
     </>)
 

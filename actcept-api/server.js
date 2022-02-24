@@ -106,6 +106,13 @@ app.get('/events', async (req, res) => {
   res.send(events);
 })
 
+app.get('/events/:id', async (req, res) => {
+  const id = req.params.id
+  const events = await db.query(`SELECT * FROM events WHERE event_id=${id}`)
+  res.send(events);
+})
+
+
 app.post('/send-registration', function (req, res) {
   // {
   //   name: 'Yingying', 

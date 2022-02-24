@@ -1,5 +1,17 @@
-const EventPage = () => {
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchEventData } from "../api/api";
 
+const EventPage = () => {
+    const {id} = useParams()
+    console.log(id)
+
+    const [eventData, setEventData] = useState([]);
+    useEffect(() => {
+        fetchEventData(id).then(setEventData);
+    }, [id]);
+        console.log("Hello")
+        console.log(eventData)
     return (<>
          <button type="button" class="btn btn-primary"> ← Home</button>
     <div class="eventFlex">
@@ -13,7 +25,7 @@ const EventPage = () => {
                 <span class="fa fa-star"></span>
             </div>
             <div id="eventTitle">
-                <p> Event Title</p>
+                <p> Event Name </p>
             </div>
         </div>
         <div class="eventCardFlex">

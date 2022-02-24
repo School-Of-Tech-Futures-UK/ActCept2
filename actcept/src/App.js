@@ -4,7 +4,7 @@ import NavigationBar from "./Components/nav";
 import * as reactRouterDom from "react-router-dom";
 import Home from './Components/home';
 import Review from './Components/review';
-import Event from './Components/event_page';
+import EventPage from './Components/event_page';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
@@ -13,9 +13,9 @@ function App() {
     <BrowserRouter>
       <NavigationBar />
       <Routes>
-        <Route path="/events" element={<Event />} />
         <Route path="/" element={<Home />} />
         <Route path="/reviews" element={<Review />} />
+        <Route path="/event-page/:id" element={<EventPage />} />
       </Routes>
     </BrowserRouter>
   );

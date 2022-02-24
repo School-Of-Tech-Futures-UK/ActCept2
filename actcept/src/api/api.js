@@ -4,3 +4,12 @@ export const fetchEvents = async () => {
   const data = await results.json();
   return data;
 };
+
+export const fetchEventData = async (id) => {
+  const url = `http://localhost:3001/events/${id}`
+  const results = await fetch(url)
+  const data = await results.json();
+  console.log('fetcheventdata has been called')
+  console.log(data)
+  return data;
+};

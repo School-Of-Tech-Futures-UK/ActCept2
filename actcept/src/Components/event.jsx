@@ -18,6 +18,7 @@ const ShowEvents = ({events}) => {
 }
 
 const Event = ({event}) => {
+  const eventURL = `/event-page/${event.event_id}`
         return <>
         <div class="cardWrapper">
           <div class="card" style={{width: '18rem'}}>
@@ -25,7 +26,7 @@ const Event = ({event}) => {
             <div class="card-body">
               <h5 class="card-title">{event.event_name}</h5>
               <p class="card-text">{event.artist_name} at {event.location} <br/> {event.date}</p>
-              <a href="/" class="btn btn-primary">Sign up now </a>
+              <a href={eventURL} class="btn btn-primary">See more </a>
             </div>
           </div>
         </div>
