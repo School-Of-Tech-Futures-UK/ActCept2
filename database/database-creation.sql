@@ -58,7 +58,7 @@ VALUES
 		('The Madness RETURNS', 'Madness SHOW', 'Madness', 'madness@accenture.com',2, '2022-04-23','London', 'Hip Hop');
 
 INSERT INTO 
-		registrations ("name", "user_email", event_id)
+		registrations ("name", user_email, event_id)
 VALUES
 		('Yingying chen','yingying@accenture.com',1),
 		('Hamza Saleem', 'hamza@accenture.com', 1),

@@ -1,4 +1,4 @@
-version: "3" 
+version: "3"
 services:
   react1:
     container_name: react1
@@ -6,12 +6,12 @@ services:
     build:
       context: ./actcept
       dockerfile: Dockerfile
-    ports: 
+    ports:
       - 5001:3000
-    
+
   api1:
     container_name: api1
-    build: 
+    build:
       context: ./actcept-api
       dockerfile: Dockerfile
     depends_on:
@@ -30,26 +30,40 @@ services:
     ports:
       - 5432:5432
 
-react2:
-  image: khaashifriaz/react2:v1
-  container_name: react2
-  ports:
-     - 5002:3000
+  # database:
 
-api2:
-  image: khaashifriaz/api2:v1
-  container_name: api2
-  ports:
-     - 3001:3000
+  #   image: postgres:latest
 
-react3:
-  image: khaashifriaz/react3:v1
-  container_name: react3
-  ports:
-     - 5003:3000
+  #   container_name: myTestPostgres2
 
-api3:
-  image: khaashifriaz/api3:v1
-  container_name: api3
-  ports:
-    - 3003:3000
+  #   environment:
+
+  #     - POSTGRES_PASSWORD=mysecretpassword
+
+  #   ports:
+
+  #     - 5432:5432
+
+  react2:
+    image: khaashifriaz/react2:v1
+    container_name: react2
+    ports:
+      - 5002:3000
+
+  api2:
+    image: khaashifriaz/api2:v1
+    container_name: api2
+    ports:
+      - 3001:3000
+
+  react3:
+    image: khaashifriaz/react3:v1
+    container_name: react3
+    ports:
+      - 5003:3000
+
+  api3:
+    image: khaashifriaz/api3:v1
+    container_name: api3
+    ports:
+      - 3003:3000

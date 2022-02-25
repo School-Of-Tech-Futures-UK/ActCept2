@@ -56,6 +56,7 @@ const EventPageComponent = ({ event }) => {
                         {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
                         <Link to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>
                         <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
+                        <Link to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>
                     </div>
                     <div class="card">
                         <div class="card-body">

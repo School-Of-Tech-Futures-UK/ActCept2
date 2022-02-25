@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ReactDOM from 'react-dom';
+import { postReview } from "../api/api";
 import '../App.css';
 
 function Review() {
+	const { id } = useParams()
 	const [name , setName] = useState('');
 	const [email , setEmail] = useState('');
     const [rating, setRating] = useState(1);
     const [review, setReview] = useState('');
+	const [message, setMessage] = useState("");
 
 
 	const getName =(e)=>{
@@ -26,13 +30,25 @@ function Review() {
     }
 	//e.preventDefault();
 
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		const res = await postReview({event_id: id, email: email, rating: rating, review_text: review})
+		if (res.status === 201) {
+			setName('')
+			setEmail('')
+			setRating(1)
+			setReview('')
+			setMessage("Your review has been submitted!")
+		} else {
+			setMessage("Oops, you haven't registered for this event!")
+		}
+	}
+
 	
 return (
 	<div className="App">
 	<header className="App-header">
-	<form >
-        {/* <onSubmit={(e) => {handleSubmit(e)}}> */}
-
+	<form onSubmit={(e) => (handleSubmit(e))}>
 	<h3> Tell us how it was! </h3>
 		<label >
 		Name:
@@ -55,6 +71,7 @@ return (
         <label> Review </label><br/>
         <textarea type="text" value={review} required onChange={(e) => (getReview(e))} /><br/> <br/>
 		<input type="submit" value="Submit"/>
+		<div className="message">{message ? <p>{message}</p> : null}</div>
 	</form>
 	</header>
 	</div>

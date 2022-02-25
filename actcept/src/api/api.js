@@ -25,3 +25,15 @@ export const postRegistrationInfo = async (registrationInfo) => {
   const resJSON = await response.text()
   return response
 }
+
+export const postReview = async (review) => {
+  const  response = await fetch('http://localhost:3001/send-review', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(review)
+  })
+  const resJSON = await response.text()
+  return response
+}

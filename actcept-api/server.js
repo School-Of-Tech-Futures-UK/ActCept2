@@ -14,11 +14,12 @@ app.use(bodyParser.json())
 //   password: process.env.DB_PASSWORD,
 // })
 
+
 const db = postgres({
-  host: dbServer,
+  host: 'gigstr-db-container',
   database: 'gitstr',
   user: 'gitstr',
-  password: dbPassword,
+  password: 'gigstr',
   port: 5432,
 
 })
