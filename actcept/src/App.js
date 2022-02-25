@@ -5,6 +5,7 @@ import * as reactRouterDom from "react-router-dom";
 import Home from './Components/home';
 import Review from './Components/review';
 import EventPage from './Components/event_page';
+import UserDetails from './Components/signup';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/reviews" element={<Review />} />
         <Route path="/event-page/:id" element={<EventPage />} />
+        <Route path="/signup" element={<UserDetails />} />
       </Routes>
     </BrowserRouter>
   );
