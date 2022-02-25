@@ -91,15 +91,6 @@ const createTables = async () => {
 
 createTables();
 
-
-const fruits = ['apple', 'banana', 'cucumber', 'damson', 'elderberry', 'fig', 'grapefruit'];
-
-app.get('/fruits', (req, res) => {
-    const randomIndex = Math.floor(Math.random() * fruits.length)
-    res.send(fruits[randomIndex]);
-})
-
-
 app.get('/events', async (req, res) => {
   // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
   const events = await db.query ('SELECT * FROM events')
@@ -113,7 +104,8 @@ app.get('/events/:id', async (req, res) => {
 })
 
 
-app.post('/send-registration', function (req, res) {
+app.post('/send-registration', (req, res) => {
+  // sample data:
   // {
   //   name: 'Yingying', 
   //   user_email: 'yingying@accenture.com', 
@@ -124,38 +116,37 @@ app.post('/send-registration', function (req, res) {
     text: 'INSERT INTO registrations("name", "user_email", event_id) VALUES($1, $2, $3) RETURNING *',
     values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
   }
-  db.query(query).then(() => {
-    res.status(201).send(query.values)
+  db.query(query).then((results) => {
+    res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
   })
-  
 })
 
+app.get('/get-registration/:id', async (req, res) => {
+  const id = req.params.id
+  const data = await db.query(`SELECT * FROM registrations WHERE event_id=${id}`)
+  res.send(data)
+})
+
+app.post('/send-review', (req, res) => {
+  // sample data:
+  // {
+  //   registration_id: 2, 
+  //   event_id: 1, 
+  //   rating: 5, 
+  //   review_text: 'Outkast are possibly the greatest men to ever walk this planet'
+  // }
+  const review = req.body
+  const query = {
+    text: 'INSERT INTO reviews (registration_id, event_id, rating, review_text) VALUES($1, $2, $3, $4) RETURNING *',
+    values: [review.registration_id, review.event_id, review.rating, review.review_text]
+  }
+  db.query(query).then((results) => {
+    res.status(201).send(`A review has been added with ID ${results[0].review_id} by the user with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
+  })
+})
+
+
 app.listen(3001, () => console.log('started'));
-
-
-
-
-// const express = require('express');
-// const serverlessExpress = require('@vendia/serverless-express')
-// const app = express();
-
-
-
-// let fileData = JSON.parse(fs.readFileSync('events.json'))
-
-
-// app.get('/events', (req, res) => {
-//     const fs = require('fs')
-//     fs.readFile('events.json', (err, data) => {
-//       if (err) throw err
-//       const returnevent = (JSON.parse(data))
-//       res.json(returnevent)
-//       res.send(returnevent);
-//     })
-    
-// })
-
-// //app.listen(3000, () => console.log('started'));
 
 // exports.handler = serverlessExpress({ app });
 
