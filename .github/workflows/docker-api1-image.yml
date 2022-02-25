@@ -1,0 +1,40 @@
+name: Docker API CI
+
+
+
+on:
+
+  push:
+
+    branches: [ dev ]
+
+jobs:
+
+
+
+  build:
+
+
+
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+
+    - name: Login to DockerHub
+      run: echo ${{ secrets.DOCKER_PASS }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+      working-directory: actcept-api
+
+
+    - name: Build the Docker image
+      run: docker build -t khaashifriaz/api1:v1 .
+      working-directory: actcept-api
+
+
+    - name: Push the docker image
+      run: docker push khaashifriaz/api1:v1
+      working-directory: actcept-api
