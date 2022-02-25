@@ -13,3 +13,15 @@ export const fetchEventData = async (id) => {
   console.log(data)
   return data;
 };
+
+export const postRegistrationInfo = async (registrationInfo) => {
+  const response = await fetch('http://localhost:3001/send-registration', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(registrationInfo)
+  })
+  const resJSON = await response.text()
+  return response
+}
