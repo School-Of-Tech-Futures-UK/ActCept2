@@ -4,7 +4,7 @@ on:
 
   push:
 
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
 
@@ -21,9 +21,9 @@ jobs:
       working-directory: actcept
 
     - name: Build the Docker image
-      run: docker build -t khaashifriaz/gigstr:react1 .
+      run: docker build -t khaashifriaz/react1:v1 .
       working-directory: actcept
 
     - name: Push the docker image
-      run: docker push khaashifriaz/gigstr:react1
+      run: docker push khaashifriaz/react1:v1
       working-directory: actcept
