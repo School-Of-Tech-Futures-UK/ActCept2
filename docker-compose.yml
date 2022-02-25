@@ -1,46 +1,55 @@
 version: "3" 
 services:
-  app:
-    container_name: react-app-prod
-    image: react-app-prod
+  react1:
+    container_name: react1
+    image: react1
     build:
       context: ./actcept
       dockerfile: Dockerfile
     ports: 
-      - 3000:3000
+      - 5001:3000
     
-  api:
-    container_name: api_actcept
+  api1:
+    container_name: api1
     build: 
       context: ./actcept-api
       dockerfile: Dockerfile
     depends_on:
       - database
     ports:
-      - 3001:3001
-    environment:
-      - DB_HOSTNAME=myTestPostgres2
-      - DB_PASSWORD=mysecretpassword
-
-       # - database
-   # environment:
-     # - DB_HOSTNAME=gigstr
-     # - DB_PASSWORD=gigstr
+      - 3001:3000
+    # environment:
+    #   - DB_HOSTNAME=myTestPostgres2
+    #   - DB_PASSWORD=mysecretpassword
 
   database:
-    image: postgres:latest
-    container_name: myTestPostgres2
+    image: khaashifriaz/gigstr:gigtag
+    container_name: gigstr-db-container
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=gigstr
     ports:
       - 5432:5432
 
-  #database:
-    #image: khaashifriaz/gigstr:gigtag   
-    #container_name: "gigstr-db-container"
-    #environment:
-      #- POSTGRES_PASSWORD=gigstr
-    #ports:
-      #- 5432:5432
+react2:
+  image: khaashifriaz/react2:v1
+  container_name: react2
+  ports:
+     - 5002:3000
 
-# docker run --name my-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+api2:
+  image: khaashifriaz/api2:v1
+  container_name: api2
+  ports:
+     - 3001:3000
+
+react3:
+  image: khaashifriaz/react3:v1
+  container_name: react3
+  ports:
+     - 5003:3000
+
+api3:
+  image: khaashifriaz/api3:v1
+  container_name: api3
+  ports:
+    - 3003:3000
