@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 // import { fetchCases, fetchCountries } from "../api";
 // import { fetchEvents } from "../api/api";
 
@@ -26,7 +25,8 @@ const Event = ({event}) => {
             <div class="card-body">
               <h5 class="card-title">{event.event_name}</h5>
               <p class="card-text">{event.artist_name} at {event.location} <br/> {event.date}</p>
-              <a href={eventURL} class="btn btn-primary">See more </a>
+              {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
+              <Link to={eventURL} class="btn btn-primary">See more</Link>
             </div>
           </div>
         </div>

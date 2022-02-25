@@ -7,11 +7,27 @@ const EventPage = () => {
     console.log(id)
 
     const [eventData, setEventData] = useState([]);
+
     useEffect(() => {
         fetchEventData(id).then(setEventData);
     }, [id]);
-        console.log("Hello")
-        console.log(eventData)
+    console.log("Hello")
+        
+    const event = eventData[0]
+    console.log(event)
+
+    if (! event) {
+        return  (
+            <div>Loading...</div>
+          )
+    }
+    return (
+        <EventPageComponent event={event} />
+    )
+}
+
+
+const EventPageComponent = ({event}) => {
     return (<>
          <button type="button" class="btn btn-primary"> ← Home</button>
     <div class="eventFlex">
@@ -25,15 +41,15 @@ const EventPage = () => {
                 <span class="fa fa-star"></span>
             </div>
             <div id="eventTitle">
-                <p> Event Name </p>
+                <p> {event.event_name}</p>
             </div>
         </div>
         <div class="eventCardFlex">
             <div class="eventDetailsFlex" id="childFlex" >
                 <div class="card mainDetails">
                     <div class="card-body">
-                        <h5 class="card-title">Main Details</h5>
-                        <p class="card-text">Event basic details, time, location etc</p>
+                        <h5 class="card-title">{event.event_description}</h5>
+                        <p class="card-text">{event.artist_name} at {event.location} <br/> {event.date}</p>
                     </div>
                 </div>
                 <div class="eventButtonsFlex">
