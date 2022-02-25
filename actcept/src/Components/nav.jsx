@@ -14,6 +14,7 @@ const NavigationBar = () => {
           <a class="navbar-brand" href="/"><b> ActCept </b>| Part of GigStr</a>
           <NavLink class="navbar-brand" to="/reviews">Review</NavLink>
           <NavLink class="navbar-brand" to="/events">Events</NavLink>
+          <NavLink class="navbar-brand" to="/signup">Sign Up</NavLink>
         </div>
       </nav>
     </>
