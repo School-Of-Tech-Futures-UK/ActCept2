@@ -16,9 +16,9 @@ app.use(bodyParser.json())
 
 
 const db = postgres({
-  host: 'gigstr-db-container',
-  database: 'gitstr',
-  user: 'gitstr',
+  host: 'gigstr-db-container' || '127.0.0.1',
+  database: 'gigstr',
+  user: 'gigstr',
   password: 'gigstr',
   port: 5432,
 
@@ -124,7 +124,7 @@ app.post('/send-registration', (req, res) => {
   // }
   const registrationInfo = req.body
   const query = {
-    text: 'INSERT INTO registrations(user_name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
+    text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
     values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
   }
   db.query(query).then((results) => {
@@ -167,7 +167,7 @@ app.post('/send-review', async (req, res) => {
 })
 
 
-app.listen(3001, () => console.log('started'));
+app.listen(3000, () => console.log('started'));
 
 // exports.handler = serverlessExpress({ app });
 

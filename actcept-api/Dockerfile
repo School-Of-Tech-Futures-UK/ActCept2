@@ -8,6 +8,6 @@ RUN cd /app && npm install
 
 COPY server.js /app/
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD cd /app && node server.js
