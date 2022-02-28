@@ -1,17 +1,18 @@
 export const fetchEvents = async () => {
   //  const results = await fetch("https://zuttio2meg.execute-api.eu-west-2.amazonaws.com/sprint1/events");
-  const results = await fetch('http://localhost:3001/events')
+  const results = await fetch('http://localhost:3002/events')
   const data = await results.json();
-  return data;
+  const filteredData = await data.filter(x => x.status === 'confirmed')
+  return filteredData;
 };
 
 export const fetchEventData = async (id) => {
-  const url = `http://localhost:3001/events/${id}`
-  const results = await fetch(url)
+  // const url = `http://localhost:3002/events`
+  const results = await fetch('http://localhost:3002/events')
   const data = await results.json();
-  console.log('fetcheventdata has been called')
-  console.log(data)
-  return data;
+  const newID = Number(id)
+  const filteredData = await data.filter((data) => data.event_id === newID)
+  return filteredData;
 };
 
 export const postRegistrationInfo = async (registrationInfo) => {
