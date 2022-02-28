@@ -54,7 +54,7 @@ services:
     image: khaashifriaz/api2:v1
     container_name: api2
     ports:
-      - 3001:3000
+      - 3002:3000
 
   react3:
     image: khaashifriaz/react3:v1
