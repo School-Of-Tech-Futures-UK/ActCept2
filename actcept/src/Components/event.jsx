@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 
 const ShowEvents = ({events}) => { 
+  console.log('REDNERING')
   return  events.map((e) => (
       <div class="flexWrapper">
       <Event event={e} />

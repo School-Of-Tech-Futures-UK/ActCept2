@@ -1,6 +1,7 @@
 import ShowEvents from "./event"
 import { useEffect, useState } from "react";
 import { fetchEvents } from "../api/api";
+import Filtering from "./filtering"
 
 const Home = () => {
     const [events, setEvents] = useState([]);
@@ -14,7 +15,7 @@ const Home = () => {
             <h1> Welcome to ActCept </h1>
             <p> See through the crowd and find your perfect event</p>
             <div class="eventWrapper">
-                <ShowEvents events={events}/>
+                <Filtering events={events}/>
             </div>
         </div>
     </>)
