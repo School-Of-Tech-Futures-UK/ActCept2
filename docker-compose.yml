@@ -18,9 +18,9 @@ services:
       - database
     ports:
       - 3001:3000
-    # environment:
-    #   - DB_HOSTNAME=myTestPostgres2
-    #   - DB_PASSWORD=mysecretpassword
+    environment:
+      - DB_HOSTNAME=gigstr-db-container
+      - DB_PASSWORD=gigstr
 
   database:
     image: khaashifriaz/gigstr:gigtag
@@ -49,21 +49,33 @@ services:
     container_name: react2
     ports:
       - 5002:3000
+    environment:
+      - DB_HOSTNAME=gigstr-db-container
+      - DB_PASSWORD=gigstr
 
   api2:
     image: khaashifriaz/api2:v1
     container_name: api2
     ports:
       - 3002:3000
+    environment:
+      - DB_HOSTNAME=gigstr-db-container
+      - DB_PASSWORD=gigstr
 
   react3:
     image: khaashifriaz/react3:v1
     container_name: react3
     ports:
       - 5003:3000
+    environment:
+      - DB_HOSTNAME=gigstr-db-container
+      - DB_PASSWORD=gigstr
 
   api3:
     image: khaashifriaz/api3:v1
     container_name: api3
     ports:
       - 3003:3000
+    environment:
+      - DB_HOSTNAME=gigstr-db-container
+      - DB_PASSWORD=gigstr

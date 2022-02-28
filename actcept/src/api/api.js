@@ -37,3 +37,12 @@ export const postReview = async (review) => {
   const resJSON = await response.text()
   return response
 }
+
+export const getAllReviews = async () => {
+  const url = `http://localhost:3001/getallreviews`
+  const results = await fetch(url)
+  const data = await results.json();
+  console.log('getAllReviews has been called')
+  console.log(data)
+  return data;
+}

@@ -166,6 +166,10 @@ app.post('/send-review', async (req, res) => {
   }
 })
 
+app.get('/getallreviews', async (req, res) => {
+  const reviews = await db.query(`SELECT * FROM reviews`)
+  res.send(reviews)
+})
 
 app.listen(3000, () => console.log('started'));
 
