@@ -100,9 +100,26 @@ const Filtering = ({events}) => {
         console.log(events)
         }
 
+    // const { id } = useParams()
+    const [search , setSearch] = useState('');
+    
+    const getSearch =(e)=>{
+        setSearch(e.target.value);
+        }
+
+    
+    const filtered = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.toLowerCase().includes(search.toLowerCase())));
+    events = filtered
+    
+        // useEffect(() => {
+        //     console.log(search)
+        //     }, [search]);
+
     return (
         <div class="flexWrapper">
-            <p>Sort by:</p>
+                <p>Search</p>
+                <input type="text" value={search} required onChange={(e) => (getSearch(e))} />
+                <p>Sort by:</p>
                 <select onChange={sortSelect}>
                     <option value = 'artist_name'>Artist Name</option>
                     <option value = 'event_name'>Event Name</option>
