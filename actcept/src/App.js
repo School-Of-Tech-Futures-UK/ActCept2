@@ -4,7 +4,8 @@ import NavigationBar from "./Components/nav";
 import * as reactRouterDom from "react-router-dom";
 import Home from './Components/home';
 import Review from './Components/review';
-import Event from './Components/event';
+import EventPage from './Components/event_page';
+import UserDetails from './Components/signup';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
@@ -13,9 +14,10 @@ function App() {
     <BrowserRouter>
       <NavigationBar />
       <Routes>
-        <Route path="/events" element={<Event />} />
         <Route path="/" element={<Home />} />
-        <Route path="/reviews" element={<Review />} />
+        <Route path="/reviews/:id" element={<Review />} />
+        <Route path="/event-page/:id" element={<EventPage />} />
+        <Route path="/signup/:id" element={<UserDetails />} />
       </Routes>
     </BrowserRouter>
   );

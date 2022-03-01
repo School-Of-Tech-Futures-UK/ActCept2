@@ -1,5 +1,4 @@
-
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 // import { fetchCases, fetchCountries } from "../api";
 // import { fetchEvents } from "../api/api";
 
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 
 
 const ShowEvents = ({events}) => { 
+  console.log('REDNERING')
   return  events.map((e) => (
       <div class="flexWrapper">
       <Event event={e} />
@@ -18,14 +18,16 @@ const ShowEvents = ({events}) => {
 }
 
 const Event = ({event}) => {
+  const eventURL = `/event-page/${event.event_id}`
         return <>
         <div class="cardWrapper">
           <div class="card" style={{width: '18rem'}}>
-            <img src="https://www.accenture.com/t00010101T000000Z__w__/gb-en/_acnmedia/Accenture/Redesign-Assets/Careers/Images/Marquee/8/Accenture-in-session-marquee.jpg" class="card-img-top" alt="..." />
+            <img src={`${event.event_image}`} class="card-img-top" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">{event.event_name}</h5>
-              <p class="card-text">{event.artist_name} at {event.location} <br/> {event.date}</p>
-              <a href="/" class="btn btn-primary">Sign up now </a>
+              <h5 class="card-title">{event.name}</h5>
+              <p class="card-text">{event.artist_name} <br/> {event.date}</p>
+              {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
+              <Link to={eventURL} class="btn btn-primary">See more</Link>
             </div>
           </div>
         </div>

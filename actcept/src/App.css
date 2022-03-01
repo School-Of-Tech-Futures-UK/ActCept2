@@ -39,8 +39,105 @@
 
 .cardWrapper {
   padding: 20px;
+  flex-grow:1;
+  flex-shrink: 1;
 }
 
-.flexWrapper {
+.eventWrapper {
   display: flex;
+}
+
+.body {
+  background-color: #E2E6EA;
+}
+
+.card {
+  border-radius: 20px;
+  background-color: #E2E6EA;
+  border-width: 0px;
+}
+
+.mainDetails {
+  background-color: #FFEB32;
+}
+
+.btn-primary{
+  margin-top:20px;
+  border-radius: 12px;
+  background-color: #FF7800;
+  border: 0px;
+}
+
+.eventFlex{
+  padding-top: 30px;
+  padding-left: 250px;
+  padding-right: 250px;
+}
+
+.eventCardFlex{
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+#childFlex{
+  flex-grow: 2;
+  flex-shrink: 2;
+  padding: 10px;
+}
+
+#mapFlex{
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 10px;
+}
+
+.eventDetailsFlex{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.eventButtonsFlex{
+  display:flex;
+}
+
+#eventButtonFlex{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+#eventHeader{
+    position: relative;
+    margin-bottom:20px;
+    border-radius: 30px;
+}
+
+#eventImage{
+    position: relative;
+    border-radius: 30px;
+}
+
+#eventReview{
+  position: absolute;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  bottom: 0;
+  right: 0;
+}
+
+#eventTitle{
+  color: white;
+  font-size: 40px;
+  font-weight: 900;
+  position: absolute;
+  padding-left: 30px;
+  bottom: 0;
+  left: 0;
+}
+
+.checked {
+  color: orange;
 }

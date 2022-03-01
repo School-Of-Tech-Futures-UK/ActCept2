@@ -1,70 +1,99 @@
 const express = require('express');
 const serverlessExpress = require('@vendia/serverless-express')
 const cors = require('cors')
+const bodyParser = require("body-parser")
 const app = express();
 const postgres = require('pg-promise')();
 app.use(cors())
+app.use(bodyParser.json())
+
+// const db = postgres({
+//   host: process.env.DB_HOSTNAME || '127.0.0.1',
+//   database: 'postgres',
+//   user: 'postgres',
+//   password: process.env.DB_PASSWORD,
+// })
+
 
 const db = postgres({
-  host: process.env.DB_HOSTNAME || '127.0.0.1',
-  database: 'postgres',
-  user: 'postgres',
-  password: process.env.DB_PASSWORD,
+  host: 'gigstr-db-container' || '127.0.0.1',
+  database: 'gigstr',
+  user: 'gigstr',
+  password: 'gigstr',
+  port: 5432,
+
 })
-
-
-const fruits = ['apple', 'banana', 'cucumber', 'damson', 'elderberry', 'fig', 'grapefruit'];
-
-app.get('/fruits', (req, res) => {
-    const randomIndex = Math.floor(Math.random() * fruits.length)
-    res.send(fruits[randomIndex]);
-})
-
 
 app.get('/events', async (req, res) => {
   // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
-  const events = await db.query ('SELECT * FROM events')
+  const events = await db.query('SELECT * FROM events')
   res.send(events);
 })
 
-// app.get('/events', (req, res) => {
-//   // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
-//   const events = 'hello'
-//   console.log('')
-//   res.send(events);
-// })
+app.get('/events/:id', async (req, res) => {
+  const id = req.params.id
+  const events = await db.query(`SELECT * FROM events WHERE event_id=${id}`)
+  res.send(events);
+})
 
 
-// app.get('/events', async (req, res) => {
-//   const event = await
-// })
+app.post('/send-registration', (req, res) => {
+  // sample data:
+  // {
+  //   name: 'Yingying', 
+  //   user_email: 'yingying@accenture.com', 
+  //   event_id: 2
+  // }
+  const registrationInfo = req.body
+  const query = {
+    text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
+    values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
+  }
+  db.query(query).then((results) => {
+    res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
+  })
+})
 
-app.listen(3001, () => console.log('started'));
+app.get('/get-registration/:id', async (req, res) => {
+  const id = req.params.id
+  const data = await db.query(`SELECT * FROM registrations WHERE event_id=${id}`)
+  res.send(data)
+})
 
+app.post('/send-review', async (req, res) => {
+  // sample data:
+  // {
+  //   registration_id: 2, 
+  //   event_id: 1, 
+  //   rating: 5, 
+  //   review_text: 'Outkast are possibly the greatest men to ever walk this planet'
+  // }
+  const review = await req.body
+  console.log('review:')
+  console.log(review)
+  const registration_id = await db.query(`SELECT registration_id FROM registrations WHERE user_email='${review.email}' AND event_id=${review.event_id}`)
+  console.log('reID')
+  console.log(registration_id)
+  if (registration_id === []) {
+    res.status(501).send(`Invalid registration ID`)
+  } else {
+    const query = {
+      text: 'INSERT INTO reviews (registration_id, event_id, rating, review_text) VALUES($1, $2, $3, $4) RETURNING *',
+      values: [registration_id[0].registration_id, review.event_id, review.rating, review.review_text]
+    }
+    db.query(query).then((results) => {
+      res.status(201).send(`A review has been added with ID ${results[0].review_id} by the user with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
+    })
 
+  }
+})
 
+app.get('/getallreviews', async (req, res) => {
+  const reviews = await db.query(`SELECT * FROM reviews`)
+  res.send(reviews)
+})
 
-// const express = require('express');
-// const serverlessExpress = require('@vendia/serverless-express')
-// const app = express();
-
-
-
-// let fileData = JSON.parse(fs.readFileSync('events.json'))
-
-
-// app.get('/events', (req, res) => {
-//     const fs = require('fs')
-//     fs.readFile('events.json', (err, data) => {
-//       if (err) throw err
-//       const returnevent = (JSON.parse(data))
-//       res.json(returnevent)
-//       res.send(returnevent);
-//     })
-    
-// })
-
-// //app.listen(3000, () => console.log('started'));
+app.listen(3000, () => console.log('started'));
 
 // exports.handler = serverlessExpress({ app });
 
