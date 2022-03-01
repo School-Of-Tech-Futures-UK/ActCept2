@@ -37,7 +37,7 @@ app.get('/events/:id', async (req, res) => {
 })
 
 
-app.post('/send-registration', (req, res) => {
+app.post('/send-registration', async (req, res) => {
   // sample data:
   // {
   //   name: 'Yingying', 
@@ -45,6 +45,9 @@ app.post('/send-registration', (req, res) => {
   //   event_id: 2
   // }
   const registrationInfo = req.body
+  const value = await db.query(`SELECT user_email FROM registrations where event_id = ${registrationInfo.event_id}`)
+  console.log(typeof(value))
+  if (value.length === 0) {
   const query = {
     text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
     values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
@@ -52,6 +55,11 @@ app.post('/send-registration', (req, res) => {
   db.query(query).then((results) => {
     res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
   })
+}
+else
+{
+  res.status(301).send(`Already registered`)
+}
 })
 
 app.get('/get-registration/:id', async (req, res) => {

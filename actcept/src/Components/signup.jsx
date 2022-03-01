@@ -24,8 +24,11 @@ function UserDetails() {
 			setName('')
 			setEmail('')
 			setMessage("Successfully registered, thanks!")
-		} else {
-			setMessage("Oops! Some error occured...")
+		} else if(res.status === 301){
+			setMessage("Looks like you've already registered for this event!")
+		}
+		else {
+			setMessage("Oops! Some error occured")
 		}
 	}
 	
