@@ -1,6 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchEventData } from "../api/api";
+import { getAllReviews } from "../api/api";
+import ShowReviews from "./event_review";
 
 const EventPage = () => {
     const { id } = useParams()
@@ -72,6 +74,9 @@ const EventPageComponent = ({ event }) => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="eventReview">
+            <ShowReviews />
             </div>
         </div>
     </>)
