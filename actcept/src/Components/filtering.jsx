@@ -127,7 +127,7 @@ const Filtering = ({events}) => {
                     <option value = 'location'>Location</option>
                     <option value = 'date'>Date</option>
                 </select>
-                <div> 
+                <div class="eventWrapper"> 
                 <ShowEvents events={events}/>
                 </div>
         </div>

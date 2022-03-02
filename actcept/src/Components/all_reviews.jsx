@@ -40,3 +40,5 @@ const ReviewComponent = ({ review }) => {
         </div>
     </>)
 }
+
+export default ReviewComponent; 

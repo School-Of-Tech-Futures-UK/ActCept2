@@ -47,3 +47,9 @@ export const getAllReviews = async () => {
   console.log(data)
   return data;
 }
+
+export const fetchRegistrations = async (id) => {
+  const results = await fetch(`http://localhost:3001/get-registration/${id}`)
+  const data = await results.json();
+  return data;
+};

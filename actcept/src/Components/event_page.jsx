@@ -76,7 +76,9 @@ const EventPageComponent = ({ event }) => {
                 </div>
             </div>
             <div class="eventReview">
-            <ShowReviews />
+                <div class="accordion" id="accordionExample">
+                    <ShowReviews id={event.event_id}/>
+                </div>
             </div>
         </div>
     </>)
