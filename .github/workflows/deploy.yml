@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: false
-      AWS_ACCOUNT: ${{ env.AWS_ACCOUNT }} 
+      AWS_ACCOUNT:  arn:aws:iam::${{ env.AWS_ACCOUNT }} 
       # secrets^^^
       AWS_REGION: ${{ env.AWS_REGION }}
       
