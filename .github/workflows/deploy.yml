@@ -1,0 +1,44 @@
+name: Deploy to AWS
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+      AWS_REGION: eu-west-2
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Lambda dependencies
+        working-directory: ./lambda
+        run: npm ci
+      
+      - name: Install react dependencies
+        working-directory: ./actcept
+        run: npm ci
+      
+      - name: Build react app
+        working-directory: ./actcept
+        run: npm run build
+
+      - name: Install CDK and dependencies
+        working-directory: ./infra
+        run: npm ci
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/GitHubActions
+          aws-region: ${{ env.AWS_REGION }}
+          
+      - name: CDK deploy
+        working-directory: ./infra
+        run: npx cdk deploy --require-approval never
