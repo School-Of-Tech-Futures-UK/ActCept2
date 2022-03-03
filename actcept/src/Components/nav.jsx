@@ -2,9 +2,12 @@
 // import * as ReactDOM from "https://cdn.skypack.dev/react-dom@17.0.1";
 import { NavLink, useLocation } from "react-router-dom";
 
+
+
 const NavigationBar = () => {
   // For illustration
   //const { pathname } = useLocation();
+  
 
   return (
     // <label>{pathname}</label>

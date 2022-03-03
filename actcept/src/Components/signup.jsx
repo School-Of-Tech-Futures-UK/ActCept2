@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { postRegistrationInfo } from "../api/api";
+import { postRegistrationInfo, getRegistrationInfo } from "../api/api";
 import '../App.css';
 
 function UserDetails() {
@@ -19,13 +19,22 @@ function UserDetails() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		const res = await postRegistrationInfo({ name: name, user_email: email, event_id: id })
-		if (res.status === 201) {
+		const duplicate = await getRegistrationInfo(id)
+		console.log(`this is my ${id}`)
+		console.log(duplicate)
+		const newData = duplicate.filter((data) => data.user_email === email)
+		if (newData.length === 0) {
+			const res = await postRegistrationInfo({ name: name, user_email: email, event_id: id })
+			if (res.status === 201) {
+				setName('')
+				setEmail('')
+				setMessage("Successfully registered, thanks!")
+			}
+		}
+ 		else {
 			setName('')
 			setEmail('')
-			setMessage("Successfully registered, thanks!")
-		} else {
-			setMessage("Oops! Some error occured...")
+			setMessage("Looks like you've already registered for this event!")
 		}
 	}
 	

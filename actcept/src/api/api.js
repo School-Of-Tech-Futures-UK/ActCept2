@@ -9,10 +9,22 @@ export const fetchEvents = async () => {
 export const fetchEventData = async (id) => {
   // const url = `http://localhost:3002/events`
   const results = await fetch('http://localhost:3002/events')
+  // console.log(results)
   const data = await results.json();
+  // console.log(`My data ${data}`)
   const newID = Number(id)
   const filteredData = await data.filter((data) => data.event_id === newID)
   return filteredData;
+};
+
+export const getRegistrationInfo = async(id) => {
+  console.log(`Reg ID ${id}`)
+  const newID = Number(id)
+  const url = `http://localhost:3001/get-registration/${newID}`
+  const results = await fetch(url)
+  const data = await results.json();
+  console.log(data)
+  return data;
 };
 
 export const postRegistrationInfo = async (registrationInfo) => {
@@ -47,3 +59,9 @@ export const getAllReviews = async () => {
   console.log(data)
   return data;
 }
+
+export const fetchRegistrations = async (id) => {
+  const results = await fetch(`http://localhost:3001/get-registration/${id}`)
+  const data = await results.json();
+  return data;
+};

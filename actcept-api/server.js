@@ -24,20 +24,18 @@ const db = postgres({
 
 })
 
-app.get('/events', async (req, res) => {
-  // const person = await db.query(`SELECT pupil_first_name, pupil_surname FROM pupils WHERE pupil_id=${req.params.id}`);
-  const events = await db.query('SELECT * FROM events')
-  res.send(events);
-})
+// app.get('/events', async (req, res) => {
+//   const events = await db.query('SELECT * FROM events')
+//   res.send(events);
+// })
 
-app.get('/events/:id', async (req, res) => {
-  const id = req.params.id
-  const events = await db.query(`SELECT * FROM events WHERE event_id=${id}`)
-  res.send(events);
-})
+// app.get('/events/:id', async (req, res) => {
+//   const id = req.params.id
+//   const events = await db.query(`SELECT * FROM events WHERE event_id=${id}`)
+//   res.send(events);
+// })
 
-
-app.post('/send-registration', (req, res) => {
+app.post('/send-registration', async (req, res) => {
   // sample data:
   // {
   //   name: 'Yingying', 
@@ -52,6 +50,7 @@ app.post('/send-registration', (req, res) => {
   db.query(query).then((results) => {
     res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
   })
+
 })
 
 app.get('/get-registration/:id', async (req, res) => {
@@ -60,10 +59,31 @@ app.get('/get-registration/:id', async (req, res) => {
   res.send(data)
 })
 
+app.put('/edit-registration/:id', async (req, res) => {
+  const id = req.params.id
+  const data = await req.body
+  try {
+    await db.query(`UPDATE registrations SET name='${data.name}', user_email='${data.user_email}' WHERE registration_id=${id}`)
+    res.json('Registration updated successfully')
+  } catch (err) {
+    res.status(500).json(`Error in updating the registration ${err.message}`)
+  }
+})
+
+app.delete('/delete-registration/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    await db.query(`DELETE FROM registrations WHERE registration_id=${id}`)
+    res.json('Registration deleted successfully')
+  } catch (err) {
+    res.status(500).json(`Error while deleting review ${err.message}`)
+  }
+})
+
 app.post('/send-review', async (req, res) => {
-  // sample data:
+  // sample data from req:
   // {
-  //   registration_id: 2, 
+  //   email: 'yingying@gigstr.com', 
   //   event_id: 1, 
   //   rating: 5, 
   //   review_text: 'Outkast are possibly the greatest men to ever walk this planet'
@@ -92,6 +112,29 @@ app.get('/getallreviews', async (req, res) => {
   const reviews = await db.query(`SELECT * FROM reviews`)
   res.send(reviews)
 })
+
+app.put('/edit-review/:id', async (req, res) => {
+  const id = req.params.id
+  const data = await req.body
+  try {
+    await db.query(`UPDATE reviews SET rating=${data.rating}, review_text='${data.text}' WHERE review_id=${id}`)
+    res.json('Review updated successfully')
+  } catch (err) {
+    res.status(500).json(`Error in updating the review ${err.message}`)
+  }
+})
+
+
+app.delete('/delete-review/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    await db.query(`DELETE FROM reviews WHERE review_id=${id}`)
+    res.json('Review deleted successfully')
+  } catch (err) {
+    res.status(500).json(`Error while deleting review ${err.message}`)
+  }
+})
+
 
 app.listen(3000, () => console.log('started'));
 

@@ -39,7 +39,8 @@ function Review() {
 			setRating(1)
 			setReview('')
 			setMessage("Your review has been submitted!")
-		} else {
+		} 
+		else {
 			setMessage("Oops, you haven't registered for this event!")
 		}
 	}
