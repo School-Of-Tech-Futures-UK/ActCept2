@@ -3,13 +3,12 @@ on:
   push:
     branches:
       - dev
-env:
-  CI: false
-  
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
+      CI: false
       AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
       AWS_REGION: eu-west-2
     permissions:
