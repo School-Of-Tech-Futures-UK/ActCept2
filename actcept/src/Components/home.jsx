@@ -9,15 +9,19 @@ const Home = () => {
         fetchEvents().then(setEvents);
     }, []);
 
-
     return (<>
-        <div class="bgImage">
-            <h1> Welcome to ActCept </h1>
-            <p> See through the crowd and find your perfect event</p>
-            <div>
-                <Filtering events={events}/>
-            </div>
+        <div class="heroHeader">
+            <img src="./Assets/Images/ActCept_Logo.png" alt="..." height="120px" />
+            <br/>
+            <br/>
+            <p id="heroSubtitle"> See through the crowd and find your perfect event</p>
         </div>
+        <div>
+            <Filtering events={events}/>
+        </div>
+        <footer class="footer">
+            <img src="./Assets/Images/ActCept_Logo.png" alt="..." height="50px" />
+        </footer>
     </>)
 
 }

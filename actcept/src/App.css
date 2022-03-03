@@ -47,26 +47,26 @@
   display: flex;
 }
 
-.body {
+/* .body {
   background-color: #E2E6EA;
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: #E2E6EA;
   border-width: 0px;
-}
+} */
 
 .mainDetails {
   background-color: #FFEB32;
 }
 
-.btn-primary{
+/* .btn-primary{
   margin-top:20px;
   border-radius: 12px;
   background-color: #FF7800;
   border: 0px;
-}
+} */
 
 .eventFlex{
   padding-top: 30px;
@@ -140,4 +140,25 @@
 
 .checked {
   color: orange;
+}
+
+.roundedImage{
+  position: relative;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.heroHeader{
+  background-image: url("../public/Assets/Images/Wave.png");
+  background-position: center;
+  z-index:-1;
+  object-fit: cover;
+  height:300px;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  padding-left:100px;
+  padding-top:50px;
 }

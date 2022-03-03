@@ -1,4 +1,5 @@
 import './App.css';
+import './custom.css';
 import NavigationBar from "./Components/nav";
 // import BrowserRouter from "react-router-dom";
 import * as reactRouterDom from "react-router-dom";

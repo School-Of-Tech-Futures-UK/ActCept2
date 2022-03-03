@@ -22,12 +22,12 @@ const Event = ({event}) => {
         return <>
         <div class="cardWrapper">
           <div class="card" style={{width: '18rem'}}>
-            <img src={`${event.event_image}`} class="card-img-top" alt="..." />
+            <img src={`${event.event_image}`} class="card-img-top roundedImage" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">{event.name}</h5>
+              <h5 class="card-title">{event.event_name}</h5>
               <p class="card-text">{event.artist_name} <br/> {event.date}</p>
               {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
-              <Link to={eventURL} class="btn btn-primary">See more</Link>
+              <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>
             </div>
           </div>
         </div>

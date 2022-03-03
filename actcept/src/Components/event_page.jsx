@@ -31,7 +31,7 @@ const EventPage = () => {
 
 const EventPageComponent = ({ event }) => {
     return (<>
-        <Link to='/' type="button" class="btn btn-primary"> ← Home</Link>
+        <Link type="button" to='/' class="btn btn-primary"> ← Home</Link>
         <div class="eventFlex">
             <div id="eventHeader">
                 <img id="eventImage" src="https://www.accenture.com/t00010101T000000Z__w__/gb-en/_acnmedia/Accenture/Redesign-Assets/Careers/Images/Marquee/8/Accenture-in-session-marquee.jpg" class="card-img-top" alt="..." height="250px" />
@@ -56,7 +56,7 @@ const EventPageComponent = ({ event }) => {
                     </div>
                     <div class="eventButtonsFlex">
                         {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
-                        <Link to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>
+                        <Link type="button" to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>
                         <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
                         <Link to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>
                     </div>

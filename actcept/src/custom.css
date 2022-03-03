@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "Graphik-Regular";
+  src: url("../public/Assets/Fonts/Graphik-Regular.ttf")
+}
+
+@font-face {
+  font-family: "Graphik-Bold";
+  src: url("../public/Assets/Fonts/Graphik-Bold.ttf")
+}
+
+@font-face {
+  font-family: "Graphik-Semibold";
+  src: url("../public/Assets/Fonts/Graphik-Semibold.ttf")
+}
+
+.body {
+    background-color: white;
+    font-family: "Graphik-Regular";
+  }
+
+.card {
+    border-radius: 15px;
+    background-color: #E2E6EA;
+    border-width: 0px;
+  }
+
+.btn-primary{
+margin-top:20px;
+border-radius: 12px;
+background-color: #FF7800;
+border: 0px;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus{
+    background-color: #BF5A00;
+    border: 0px;
+}
+
+.footer {
+  background-color: black;
+  padding: 20px;
+}
+
+.bg-dark{
+  background-color: black;
+}
+
+#heroSubtitle{
+  color: #FFEB32;
+  font-size: 35px;
+  font-family: "Graphik-Semibold";
+}
