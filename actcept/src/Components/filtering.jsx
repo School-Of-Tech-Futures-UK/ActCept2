@@ -39,8 +39,8 @@ const Filtering = ({events}) => {
         
     const sortGenre = (a, b) => {
         console.log('SORTING')
-        let fa = a.type_of_event,
-            fb = b.type_of_event;
+        let fa = a.genre,
+            fb = b.genre;
 
         if (fa < fb) {
             return -1;
@@ -83,7 +83,7 @@ const Filtering = ({events}) => {
         events.sort(sortArtist)
         console.log(events)
         }
-    else if (sortingCategory === 'type_of_event'){
+    else if (sortingCategory === 'genre'){
         events.sort(sortGenre)
         console.log(events)
         }
@@ -123,7 +123,7 @@ const Filtering = ({events}) => {
                 <select onChange={sortSelect}>
                     <option value = 'artist_name'>Artist Name</option>
                     <option value = 'event_name'>Event Name</option>
-                    <option value = 'type_of_event'>Genre</option>
+                    <option value = 'genre'>Genre</option>
                     <option value = 'location'>Location</option>
                     <option value = 'date'>Date</option>
                 </select>
