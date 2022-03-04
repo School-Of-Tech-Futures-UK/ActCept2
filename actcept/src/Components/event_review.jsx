@@ -8,7 +8,7 @@ const ShowReviews = ({ id }) => {
     console.log(`registrations should be empty: ${registrations}`)
     useEffect(() => {
         getAllReviews().then(setReviewData).then(fetchRegistrations(id).then(setRegistrations));
-    }, []);
+    }, [id]);
     // useEffect(() => {
     //     fetchRegistrations(id).then(setRegistrations);
     // }, []);
