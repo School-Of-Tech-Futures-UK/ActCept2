@@ -59,6 +59,11 @@ class FullStackDemoStack extends cdk.Stack {
 
     const apiGateway = new apigw.LambdaRestApi(this, 'API', {
       handler: apiLambda
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigw.Cors.ALL_ORIGINS,
+        allowMethods: apigw.Cors.ALL_METHODS,
+        allowHeaders: apigw.Cors.DEFAULT_HEADERS
+      }
     });
 
 
