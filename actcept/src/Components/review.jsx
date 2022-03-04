@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import { postReview, fetchRegistrations } from "../api/api";
+import { postReview, getRegistrationInfo } from "../api/api";
 import '../App.css';
 
 function Review() {
@@ -32,7 +32,7 @@ function Review() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		const registrations = await fetchRegistrations(id)
+		const registrations = await getRegistrationInfo(id)
 		const newData = registrations.filter((data) => data.email === email)
 		if (newData.length === 0) {
 			setName('')
