@@ -12,24 +12,24 @@ const ShowReviews = ({ id }) => {
     // useEffect(() => {
     //     fetchRegistrations(id).then(setRegistrations);
     // }, []);
-    if (!reviewData || !registrations) {
+    if (!reviewData) {
         return <>There are no reviews</>
     } else {
         const filteredReview = reviewData.filter(x => x.event_id === id)
         console.log(`registrations should be filled: ${registrations}`)
         return filteredReview.map((e) => (
-                <EventReviewComponent reviewComponent={e} userName={registrations.find(x => x.registration_id===e.registration_id).name}/>
+                <EventReviewComponent reviewComponent={e}/>
         ))
     }
 
 }
 
-const EventReviewComponent = ({ reviewComponent, userName }) => {
+const EventReviewComponent = ({ reviewComponent }) => {
     return (<>
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <strong>{userName} </strong> {reviewComponent.rating}
+                    Rating: {reviewComponent.rating}
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
