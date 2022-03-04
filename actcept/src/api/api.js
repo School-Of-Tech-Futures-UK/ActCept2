@@ -61,7 +61,8 @@ export const getAllReviews = async () => {
 }
 
 export const fetchRegistrations = async (id) => {
-  const results = await fetch(`https://79elonzas5.execute-api.eu-west-2.amazonaws.com/prod/api/get-registration/${id}`)
+  const newID = Number(id)
+  const results = await fetch(`https://79elonzas5.execute-api.eu-west-2.amazonaws.com/prod/api/get-registration/${newID}`)
   const data = await results.json();
   return data;
 };

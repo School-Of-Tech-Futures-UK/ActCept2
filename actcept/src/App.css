@@ -161,7 +161,17 @@
   height:min(40vw,300px);
   background-color: black;
   color: white;
-  padding: 20px;
-  padding-left:100px;
-  padding-top:50px;
+  padding: 3vw;
+  padding-left:5vw;
+  padding-top:5vw;
+}
+
+#heroSubtitle{
+  color: #FFEB32;
+  font-size: min(5vw, 40px);
+  font-family: "Graphik-Semibold";
+}
+
+#heroImage{
+  height:min(10vw,300px);
 }

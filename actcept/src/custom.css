@@ -45,9 +45,3 @@ border: 0px;
 .bg-dark{
   background-color: black;
 }
-
-#heroSubtitle{
-  color: #FFEB32;
-  font-size: min(5vw, 40px);
-  font-family: "Graphik-Semibold";
-}
