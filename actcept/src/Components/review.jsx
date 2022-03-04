@@ -33,7 +33,7 @@ function Review() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		const registrations = await getRegistrationInfo(id)
-		const newData = registrations.filter((data) => data.email === email)
+		const newData = registrations.filter((data) => data.user_email === email)
 		if (newData.length === 0) {
 			setName('')
 			setEmail('')
