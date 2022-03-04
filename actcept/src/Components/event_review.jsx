@@ -34,7 +34,8 @@ const EventReviewComponent = ({ reviewComponent, userName }) => {
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    {reviewComponent.review_text}
+                    {/* {reviewComponent.review_text} */}
+                    <strong>TEXT</strong>
                 </div>
             </div>
         </div>
