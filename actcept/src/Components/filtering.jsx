@@ -115,23 +115,27 @@ const Filtering = ({events}) => {
         //     console.log(search)
         //     }, [search]);
 
-    return (
-        <div class="flexWrapper">
-                <p>Search</p>
-                <input type="text" value={search} required onChange={(e) => (getSearch(e))} />
+    return (<>
+        <div class="searchWrapper">
+            <div class="searchChildWrapper">
+                <p>Search  </p>
+                <input id="searchBar" type="text" placeholder="" value={search} required onChange={(e) => (getSearch(e))} />
+            </div>
+            <div class="searchChildWrapper">
                 <p>Sort by:</p>
-                <select onChange={sortSelect}>
-                    <option value = 'artist_name'>Artist Name</option>
-                    <option value = 'event_name'>Event Name</option>
-                    <option value = 'genre'>Genre</option>
-                    <option value = 'location'>Location</option>
-                    <option value = 'date'>Date</option>
-                </select>
-                <div class="eventWrapper"> 
-                <ShowEvents events={events}/>
-                </div>
+                    <select onChange={sortSelect}>
+                        <option value = 'artist_name'>Artist Name</option>
+                        <option value = 'event_name'>Event Name</option>
+                        <option value = 'genre'>Genre</option>
+                        <option value = 'location'>Location</option>
+                        <option value = 'date'>Date</option>
+                    </select>
+            </div>
         </div>
-    )
+            <div class="eventWrapper"> 
+            <ShowEvents events={events}/>
+            </div>
+        </>)
 
   }
 

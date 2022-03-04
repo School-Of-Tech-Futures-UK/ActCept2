@@ -46,6 +46,7 @@
 .eventWrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* .body {
@@ -175,4 +176,21 @@
 
 #heroImage{
   height:min(10vw,300px);
+}
+
+.searchWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchChildWrapper{
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top:1vw;
+}
+
+#searchBar{
+  border-radius: 15px;
 }
