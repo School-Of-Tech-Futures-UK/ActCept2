@@ -45,6 +45,7 @@
 
 .eventWrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 /* .body {
@@ -70,12 +71,13 @@
 
 .eventFlex{
   padding-top: 30px;
-  padding-left: 250px;
-  padding-right: 250px;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 .eventCardFlex{
   display: flex;
+  flex-wrap: wrap;
   background-color: white;
   padding: 20px;
   border-radius: 30px;
@@ -101,6 +103,7 @@
 
 .eventButtonsFlex{
   display:flex;
+  flex-wrap: wrap;
 }
 
 #eventButtonFlex{

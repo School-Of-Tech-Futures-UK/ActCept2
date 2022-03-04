@@ -4,7 +4,7 @@ const serverlessExpress = require('@vendia/serverless-express')
 const cors = require('cors')
 const bodyParser = require("body-parser")
 const app = express();
-const pg = require('pg-promise')();
+const postgres = require('pg-promise')();
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -18,10 +18,10 @@ const db = pg({
     port: process.env.DB_PORT || 5432,
 })
 
-// app.get('/api/events', async (req, res) => {
-//   const events = await db.query('SELECT * FROM event')
-//   res.send(events);
-// })
+app.get('/api/events', async (req, res) => {
+  const events = await db.query('SELECT * FROM event')
+  res.send(events);
+})
 
 
 app.post('/api/send-registration', async (req, res) => {
