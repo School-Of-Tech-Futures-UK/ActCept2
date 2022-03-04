@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactDOM from 'react-dom';
-import { postReview } from "../api/api";
+import { postReview, fetchRegistrations } from "../api/api";
 import '../App.css';
 
 function Review() {
@@ -32,17 +32,29 @@ function Review() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		const res = await postReview({event_id: id, email: email, rating: rating, review_text: review})
-		if (res.status === 201) {
+		const registrations = await fetchRegistrations(id)
+		const newData = registrations.filter((data) => data.email === email)
+		if (newData.length === 0) {
 			setName('')
 			setEmail('')
 			setRating(1)
 			setReview('')
-			setMessage("Your review has been submitted!")
-		} 
-		else {
-			setMessage("Oops, you haven't registered for this event!")
+			setMessage(`Looks like you haven't registered for this event!`)
 		}
+		else{
+			const res = await postReview({event_id: id, email: email, rating: rating, review_text: review})
+			if (res.status === 201) {
+				setName('')
+				setEmail('')
+				setRating(1)
+				setReview('')
+				setMessage("Your review has been submitted!")
+			} 
+			else {
+				setMessage("Oops, there is some error!")
+			}
+		}
+
 	}
 
 	

@@ -48,6 +48,6 @@ border: 0px;
 
 #heroSubtitle{
   color: #FFEB32;
-  font-size: 35px;
+  font-size: min(5vw, 40px);
   font-family: "Graphik-Semibold";
 }
