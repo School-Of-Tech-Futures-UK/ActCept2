@@ -1,35 +1,46 @@
-import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllReviews, fetchRegistrations } from "../api/api";
 
+const fetchData = async (id) => {
+    const fetchedReviewData = await getAllReviews()
+    if (fetchedReviewData.length !== 0) {
+        const fetchedRegistrationData = await fetchRegistrations(id)
+        const filteredReviewData = fetchedReviewData.filter(x => x.event_id === id)
+        filteredReviewData.map((e) => {
+            const name = fetchedRegistrationData.find(x => x.registration_id === e.registration_id).name
+            e.name = name
+            return e
+        })
+        return filteredReviewData
+    }
+    return []
+}
+
 const ShowReviews = ({ id }) => {
     const [reviewData, setReviewData] = useState([]);
-    const [registrations, setRegistrations] = useState([]);
-    console.log(`registrations should be empty: ${registrations}`)
+    // const [registrations, setRegistrations] = useState([]);
+    console.log(`registrations should be empty: ${reviewData}`)
     useEffect(() => {
-        getAllReviews().then(setReviewData).then(fetchRegistrations(id).then(setRegistrations));
+        fetchData(id).then(setReviewData);
     }, [id]);
-    // useEffect(() => {
-    //     fetchRegistrations(id).then(setRegistrations);
-    // }, []);
-    if (!reviewData) {
-        return <>There are no reviews</>
+    if (reviewData.length === 0) {
+        return <div>There are no reviews</div>
     } else {
-        const filteredReview = reviewData.filter(x => x.event_id === id)
-        console.log(`registrations should be filled: ${registrations}`)
-        return filteredReview.map((e) => (
-                <EventReviewComponent reviewComponent={e}/>
-        ))
+        console.log(`registrations should be filled: ${reviewData}`)
+        return reviewData.map((e) => {
+            return(
+            <EventReviewComponent reviewComponent={e}/>
+        )})
     }
 
 }
 
-const EventReviewComponent = ({ reviewComponent }) => {
+const EventReviewComponent = ({ reviewComponent}) => {
     return (<>
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Rating: {reviewComponent.rating}
+                    <strong>{reviewComponent.name} </strong> Rating: {reviewComponent.rating}
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
