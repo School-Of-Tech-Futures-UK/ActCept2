@@ -492,7 +492,7 @@
                   "aws:cdk:cloudformation:props": {
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-934913032222-eu-west-2",
-                      "s3Key": "48509752895c066438e263911a7ebbc162c841aaf7f1a8255d216b87db4dc616.zip"
+                      "s3Key": "405e43861baed71757181b985983f552d98804e4041a3702dc486d4706b9e15c.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -1074,21 +1074,54 @@
             "id": "Cloudfront",
             "path": "ActceptCdkStack2/Cloudfront",
             "children": {
-              "CFDistribution": {
-                "id": "CFDistribution",
-                "path": "ActceptCdkStack2/Cloudfront/CFDistribution",
+              "Origin1": {
+                "id": "Origin1",
+                "path": "ActceptCdkStack2/Cloudfront/Origin1",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.76"
+                }
+              },
+              "Origin2": {
+                "id": "Origin2",
+                "path": "ActceptCdkStack2/Cloudfront/Origin2",
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.0.76"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "ActceptCdkStack2/Cloudfront/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
                   "aws:cdk:cloudformation:props": {
                     "distributionConfig": {
                       "enabled": true,
-                      "defaultRootObject": "index.html",
-                      "httpVersion": "http2",
-                      "priceClass": "PriceClass_100",
-                      "ipv6Enabled": true,
                       "origins": [
                         {
-                          "id": "origin1",
+                          "domainName": {
+                            "Fn::GetAtt": [
+                              "WebsiteBucket6D8C9B54",
+                              "RegionalDomainName"
+                            ]
+                          },
+                          "id": "ActceptCdkStack2CloudfrontOrigin1CCD7F9FF",
+                          "s3OriginConfig": {
+                            "originAccessIdentity": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "origin-access-identity/cloudfront/",
+                                  {
+                                    "Ref": "OriginAccessIdentityD9BFF8B0"
+                                  }
+                                ]
+                              ]
+                            }
+                          }
+                        },
+                        {
                           "domainName": {
                             "Fn::Join": [
                               "",
@@ -1103,6 +1136,7 @@
                               ]
                             ]
                           },
+                          "id": "ActceptCdkStack2CloudfrontOrigin20BA4EB84",
                           "originPath": {
                             "Fn::Join": [
                               "",
@@ -1115,61 +1149,19 @@
                             ]
                           },
                           "customOriginConfig": {
-                            "httpPort": 80,
-                            "httpsPort": 443,
-                            "originKeepaliveTimeout": 5,
-                            "originReadTimeout": 30,
-                            "originProtocolPolicy": "https-only",
                             "originSslProtocols": [
                               "TLSv1.2"
-                            ]
-                          },
-                          "connectionAttempts": 3,
-                          "connectionTimeout": 10
-                        },
-                        {
-                          "id": "origin2",
-                          "domainName": {
-                            "Fn::GetAtt": [
-                              "WebsiteBucket6D8C9B54",
-                              "RegionalDomainName"
-                            ]
-                          },
-                          "s3OriginConfig": {
-                            "originAccessIdentity": {
-                              "Fn::Join": [
-                                "",
-                                [
-                                  "origin-access-identity/cloudfront/",
-                                  {
-                                    "Ref": "OriginAccessIdentityD9BFF8B0"
-                                  }
-                                ]
-                              ]
-                            }
-                          },
-                          "connectionAttempts": 3,
-                          "connectionTimeout": 10
+                            ],
+                            "originProtocolPolicy": "https-only"
+                          }
                         }
                       ],
                       "defaultCacheBehavior": {
-                        "allowedMethods": [
-                          "GET",
-                          "HEAD"
-                        ],
-                        "cachedMethods": [
-                          "GET",
-                          "HEAD"
-                        ],
+                        "pathPattern": "*",
+                        "targetOriginId": "ActceptCdkStack2CloudfrontOrigin1CCD7F9FF",
+                        "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
                         "compress": true,
-                        "forwardedValues": {
-                          "queryString": false,
-                          "cookies": {
-                            "forward": "none"
-                          }
-                        },
-                        "targetOriginId": "origin2",
-                        "viewerProtocolPolicy": "redirect-to-https",
+                        "viewerProtocolPolicy": "allow-all",
                         "functionAssociations": [
                           {
                             "functionArn": {
@@ -1182,31 +1174,34 @@
                           }
                         ]
                       },
-                      "cacheBehaviors": [
-                        {
-                          "cachedMethods": [
-                            "GET",
-                            "HEAD"
-                          ],
-                          "compress": true,
-                          "defaultTtl": 0,
-                          "forwardedValues": {
-                            "queryString": false,
-                            "cookies": {
-                              "forward": "none"
-                            }
-                          },
-                          "targetOriginId": "origin1",
-                          "viewerProtocolPolicy": "redirect-to-https",
-                          "pathPattern": "api/*"
-                        }
-                      ],
                       "aliases": [
                         "bookings.sotf2022-01.com"
                       ],
+                      "cacheBehaviors": [
+                        {
+                          "pathPattern": "api/*",
+                          "targetOriginId": "ActceptCdkStack2CloudfrontOrigin20BA4EB84",
+                          "allowedMethods": [
+                            "GET",
+                            "HEAD",
+                            "OPTIONS",
+                            "PUT",
+                            "PATCH",
+                            "POST",
+                            "DELETE"
+                          ],
+                          "cachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+                          "compress": true,
+                          "viewerProtocolPolicy": "allow-all"
+                        }
+                      ],
+                      "httpVersion": "http2",
+                      "ipv6Enabled": true,
+                      "priceClass": "PriceClass_100",
                       "viewerCertificate": {
                         "acmCertificateArn": "arn:aws:acm:us-east-1:934913032222:certificate/ee0d0edf-96e4-41f4-a3f9-7f81244fc744",
-                        "sslSupportMethod": "sni-only"
+                        "sslSupportMethod": "sni-only",
+                        "minimumProtocolVersion": "TLSv1.2_2021"
                       }
                     }
                   }
@@ -1218,7 +1213,7 @@
               }
             },
             "constructInfo": {
-              "fqn": "aws-cdk-lib.aws_cloudfront.CloudFrontWebDistribution",
+              "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
               "version": "2.12.0"
             }
           },
@@ -1591,7 +1586,7 @@
                     "resourceRecords": [
                       {
                         "Fn::GetAtt": [
-                          "CloudfrontCFDistribution6EF6FD0B",
+                          "Cloudfront16B1DCDE",
                           "DomainName"
                         ]
                       }

@@ -333,7 +333,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-934913032222-eu-west-2",
-          "S3Key": "48509752895c066438e263911a7ebbc162c841aaf7f1a8255d216b87db4dc616.zip"
+          "S3Key": "405e43861baed71757181b985983f552d98804e4041a3702dc486d4706b9e15c.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -373,7 +373,7 @@
       ],
       "Metadata": {
         "aws:cdk:path": "ActceptCdkStack2/API Lambda/Resource",
-        "aws:asset:path": "asset.48509752895c066438e263911a7ebbc162c841aaf7f1a8255d216b87db4dc616",
+        "aws:asset:path": "asset.405e43861baed71757181b985983f552d98804e4041a3702dc486d4706b9e15c",
         "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
@@ -734,7 +734,7 @@
         "aws:cdk:path": "ActceptCdkStack2/Cloudfront Redirect Function/Resource"
       }
     },
-    "CloudfrontCFDistribution6EF6FD0B": {
+    "Cloudfront16B1DCDE": {
       "Type": "AWS::CloudFront::Distribution",
       "Properties": {
         "DistributionConfig": {
@@ -743,39 +743,25 @@
           ],
           "CacheBehaviors": [
             {
-              "CachedMethods": [
+              "AllowedMethods": [
                 "GET",
-                "HEAD"
+                "HEAD",
+                "OPTIONS",
+                "PUT",
+                "PATCH",
+                "POST",
+                "DELETE"
               ],
+              "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
               "Compress": true,
-              "DefaultTTL": 0,
-              "ForwardedValues": {
-                "Cookies": {
-                  "Forward": "none"
-                },
-                "QueryString": false
-              },
               "PathPattern": "api/*",
-              "TargetOriginId": "origin1",
-              "ViewerProtocolPolicy": "redirect-to-https"
+              "TargetOriginId": "ActceptCdkStack2CloudfrontOrigin20BA4EB84",
+              "ViewerProtocolPolicy": "allow-all"
             }
           ],
           "DefaultCacheBehavior": {
-            "AllowedMethods": [
-              "GET",
-              "HEAD"
-            ],
-            "CachedMethods": [
-              "GET",
-              "HEAD"
-            ],
+            "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
             "Compress": true,
-            "ForwardedValues": {
-              "Cookies": {
-                "Forward": "none"
-              },
-              "QueryString": false
-            },
             "FunctionAssociations": [
               {
                 "EventType": "viewer-request",
@@ -787,23 +773,38 @@
                 }
               }
             ],
-            "TargetOriginId": "origin2",
-            "ViewerProtocolPolicy": "redirect-to-https"
+            "TargetOriginId": "ActceptCdkStack2CloudfrontOrigin1CCD7F9FF",
+            "ViewerProtocolPolicy": "allow-all"
           },
-          "DefaultRootObject": "index.html",
           "Enabled": true,
           "HttpVersion": "http2",
           "IPV6Enabled": true,
           "Origins": [
             {
-              "ConnectionAttempts": 3,
-              "ConnectionTimeout": 10,
+              "DomainName": {
+                "Fn::GetAtt": [
+                  "WebsiteBucket6D8C9B54",
+                  "RegionalDomainName"
+                ]
+              },
+              "Id": "ActceptCdkStack2CloudfrontOrigin1CCD7F9FF",
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "origin-access-identity/cloudfront/",
+                      {
+                        "Ref": "OriginAccessIdentityD9BFF8B0"
+                      }
+                    ]
+                  ]
+                }
+              }
+            },
+            {
               "CustomOriginConfig": {
-                "HTTPPort": 80,
-                "HTTPSPort": 443,
-                "OriginKeepaliveTimeout": 5,
                 "OriginProtocolPolicy": "https-only",
-                "OriginReadTimeout": 30,
                 "OriginSSLProtocols": [
                   "TLSv1.2"
                 ]
@@ -822,7 +823,7 @@
                   ]
                 ]
               },
-              "Id": "origin1",
+              "Id": "ActceptCdkStack2CloudfrontOrigin20BA4EB84",
               "OriginPath": {
                 "Fn::Join": [
                   "",
@@ -834,41 +835,18 @@
                   ]
                 ]
               }
-            },
-            {
-              "ConnectionAttempts": 3,
-              "ConnectionTimeout": 10,
-              "DomainName": {
-                "Fn::GetAtt": [
-                  "WebsiteBucket6D8C9B54",
-                  "RegionalDomainName"
-                ]
-              },
-              "Id": "origin2",
-              "S3OriginConfig": {
-                "OriginAccessIdentity": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "origin-access-identity/cloudfront/",
-                      {
-                        "Ref": "OriginAccessIdentityD9BFF8B0"
-                      }
-                    ]
-                  ]
-                }
-              }
             }
           ],
           "PriceClass": "PriceClass_100",
           "ViewerCertificate": {
             "AcmCertificateArn": "arn:aws:acm:us-east-1:934913032222:certificate/ee0d0edf-96e4-41f4-a3f9-7f81244fc744",
+            "MinimumProtocolVersion": "TLSv1.2_2021",
             "SslSupportMethod": "sni-only"
           }
         }
       },
       "Metadata": {
-        "aws:cdk:path": "ActceptCdkStack2/Cloudfront/CFDistribution"
+        "aws:cdk:path": "ActceptCdkStack2/Cloudfront/Resource"
       }
     },
     "DeployWebsiteAwsCliLayer11E6DD98": {
@@ -907,7 +885,7 @@
         },
         "Prune": true,
         "DistributionId": {
-          "Ref": "CloudfrontCFDistribution6EF6FD0B"
+          "Ref": "Cloudfront16B1DCDE"
         },
         "DistributionPaths": [
           "/*"
@@ -1093,7 +1071,7 @@
         "ResourceRecords": [
           {
             "Fn::GetAtt": [
-              "CloudfrontCFDistribution6EF6FD0B",
+              "Cloudfront16B1DCDE",
               "DomainName"
             ]
           }
@@ -1107,7 +1085,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/21Ty27bMBD8lt7XbG0jvTtKUwRIEMMG2qNBkxt1Y4oU+IgrEPz3kqJiO6lPOzua5T61YPMF+/aFH91MyMNM0Z7FrefiAJnaRbdk8TaIA3poXvSEqlkbRWI405NfnVvuMAGKBYtZsEURLPnhpzWhf9CtRefgAwmfVf8RP8aoBIp3e8lZvA9aeDK6CC/xGm1Hzk3eIx/Q/kI7+lvSrUJvTvoExDsWN0ZhEY/23FZFCdxyF7lz6B1bFQMSe2WGDrVntdu7E5GA99Ryj0c+sPg41rpB51c9jRnOcCWECdrDObawF17eQjuWVUEONcEKLJOFtTV/h3dmerjiJ/R/jCxURQmEMkG+WJOrjc+WWiqp8ygfZM6Sp1u0TdHcF81VxfVZn2J+4/6OnLe0D++qSz9B3p/Hm3xKjeYdblAYK2vVBW3RpwRNcN50V3v6+Cn3/kYSLYzLKMPJa4XLwOfg++CnS9mpcgK7fM1CEVsdXaNovIoE2khkr+7r2/w7my/zX/DqiGY2b4U6ZJtq/wH6i+8iIQMAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/21S204bMRD9Ft4nhiSC97CUComKKJH6Gjn2sB3itVe+EFaW/732eiGhzdOcOT7juS7YfMFurvjRzYQ8zBTtWdx6Lg6QqV10Sxbvgzigh+ZVT6iatVEkhhM9+dW55w4ToFiwmAVbFMGSH35aE/on3Vp0Dr6R8K/qP+LHGJVA8W4vOYuPQQtPRhfhOV6j7ci5yXvmA9rfaEd/S7pV6M2XPgHxjsWNUVjEoz21VVECt9xF7hx6x1bFgMRemaFD7Vnt9uGLSMB7arnHIx9YfB5r3aDzq57GDCe4EsIE7eEUW9gzL2+hHcuqIIeaYAWWycLamo/hk5k+rvgX+j9GFqqiBEKZIF+tydXGF0stldR5lE8yZ8nTLdqmaB6L5qLi4qwfyHlL+/D5cO4nyCvzeJuvp9G8ww0KY2UttKAt+pSgCc6b7mIb359yu+8k0cI4/zKPvEk4D3wJvg9+Oo6dKlvf5QMWitjq6BpF4yEk0EYie3PX7/M7Nl/mw39zRDObF0Edsk21fwFres2xFAMAAA=="
       },
       "Metadata": {
         "aws:cdk:path": "ActceptCdkStack2/CDKMetadata/Default"
