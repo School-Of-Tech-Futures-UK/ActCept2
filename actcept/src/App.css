@@ -49,15 +49,9 @@
   justify-content: center;
 }
 
-/* .body {
-  background-color: #E2E6EA;
-}
-
 .card {
-  border-radius: 15px;
-  background-color: #E2E6EA;
-  border-width: 0px;
-} */
+  height:475px;
+}
 
 .mainDetails {
   background-color: #FFEB32;
@@ -201,8 +195,8 @@
 
 #seeMore{
   position:relative;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin-left: 0px;
+  margin-bottom: 0px;
   bottom: 0;
   left: 0
 }
