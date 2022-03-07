@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllReviews, fetchRegistrations } from "../api/api";
+// import star from "../../public/Assets/Images/Rating.png"
+import star from "../Rating.png"
 
 const fetchData = async (id) => {
     const fetchedReviewData = await getAllReviews()
@@ -40,7 +42,7 @@ const EventReviewComponent = ({ reviewComponent}) => {
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div id="rating"> <span><strong>{reviewComponent.name} </strong></span> &emsp;<span id="reviewRating"><img src="../../public/Assets/Images/Rating.png" alt="Rating:" height="8px"/> {reviewComponent.rating} </span></div>
+                    <div id="rating"> <span><strong>{reviewComponent.name} </strong></span> &emsp;<span id="reviewRating"><img id="reviewStar" src={star} alt="Rating:" height="20px"/> {reviewComponent.rating} </span></div>
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">

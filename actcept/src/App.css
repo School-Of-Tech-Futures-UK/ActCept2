@@ -65,7 +65,7 @@
 } */
 
 .eventFlex{
-  padding-top: min(6vw, 150px);
+  padding-top: min(10vw, 30px);
   padding-left: min(10vw, 150px);
   padding-right: min(10vw, 150px);
 }
@@ -79,8 +79,8 @@
 }
 
 #childFlex{
-  flex-grow: 2;
-  flex-shrink: 2;
+  flex-grow: 1;
+  flex-shrink: 1;
   padding: 10px;
 }
 
@@ -118,6 +118,8 @@
 #eventImage{
     position: relative;
     border-radius: 30px;
+    height:min(60vw,350px);
+    object-fit: cover;
 }
 
 #eventReview{
@@ -210,13 +212,26 @@
 
 #reviewRating{
   background-color: white;
+  border: 0px solid black;
   padding: 5px;
   padding-left:10px;
   padding-right:10px;
   border-radius: 20px;
   font-family: "Graphik-Bold";
+  justify-content: center;
 }
 
 #rating{
   justify-content: center;
+  align-items: center;
+}
+
+#reviewStar{
+  height:23px;
+  padding-bottom:6px;
+  padding-right:3px
+}
+
+.card-event-page{
+  height:100px;
 }

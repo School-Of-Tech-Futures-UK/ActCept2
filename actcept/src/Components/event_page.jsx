@@ -41,11 +41,17 @@ const BookNowButton = ({ event }) => {
 
 
 const EventPageComponent = ({ event }) => {
+    let eventImage = `${event.event_image}`
+    if (eventImage.includes('http://')) {
+    }else if (eventImage.includes('https://')){
+    } else {
+    eventImage = 'https://media.istockphoto.com/photos/we-are-going-to-party-as-if-theres-no-tomorrow-picture-id1279483477?k=20&m=1279483477&s=612x612&w=0&h=xRMcRmn81eX5pJ0J_zIQJUgh1ZrrSiW1q83B3VbeGkw='
+    }
     return (<>
         <Link type="button" to='/' class="btn btn-primary"> ← Home</Link>
         <div class="eventFlex">
             <div id="eventHeader">
-                <img id="eventImage" src="https://www.accenture.com/t00010101T000000Z__w__/gb-en/_acnmedia/Accenture/Redesign-Assets/Careers/Images/Marquee/8/Accenture-in-session-marquee.jpg" class="card-img-top" alt="..." height="250px" />
+                <img id="eventImage" src={eventImage} class="card-img-top" alt="..." />
                 <div id="eventReview">
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -59,7 +65,7 @@ const EventPageComponent = ({ event }) => {
             </div>
             <div class="eventCardFlex">
                 <div class="eventDetailsFlex" id="childFlex" >
-                    <div class="card mainDetails">
+                    <div class="card mainDetails card-event-page">
                         <div class="card-body">
                             <h5 class="card-title">{event.event_description}</h5>
                             <p class="card-text">{event.artist_name} at {event.location} <br /> {event.date}</p>
@@ -79,7 +85,7 @@ const EventPageComponent = ({ event }) => {
                     </div>
                 </div>
                 <div id="mapFlex">
-                    <div class="card">
+                    <div class="card card-event-page">
                         <div class="card-body">
                             <h5 class="card-title">Map Here</h5>
                         </div>
