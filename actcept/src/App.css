@@ -200,3 +200,16 @@
   bottom: 0;
   left: 0
 }
+
+#reviewRating{
+  background-color: white;
+  padding: 5px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 20px;
+  font-family: "Graphik-Bold";
+}
+
+#rating{
+  justify-content: center;
+}
