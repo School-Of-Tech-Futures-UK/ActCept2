@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 
 const ShowEvents = ({events}) => { 
   console.log('REDNERING')
+  if(events.length === 0){
+    return <><br/> <p id="heroSubtitle"> No matching events</p></>
+  }
   return  events.map((e) => (
       <div class="flexWrapper">
       <Event event={e} />
