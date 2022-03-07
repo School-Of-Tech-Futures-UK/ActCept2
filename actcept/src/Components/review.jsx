@@ -34,6 +34,7 @@ function Review() {
 		e.preventDefault()
 		const registrations = await getRegistrationInfo(id)
 		const newData = registrations.filter((data) => data.user_email === email)
+		console.log(newData)
 		if (newData.length === 0) {
 			setName('')
 			setEmail('')
