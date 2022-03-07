@@ -28,6 +28,17 @@ const EventPage = () => {
     )
 }
 
+const BookNowButton = ({ event }) => {
+    const eventDate = new Date(event.date)
+    const nowDate = new Date()
+    nowDate.setHours(0,0,0,0)
+    if (eventDate < nowDate) {
+        return (<button type="button" class="btn btn-secondary" id="eventButtonFlex" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Sorry! Cannot book for a past event.">Book Now</button>)
+    } else {
+        return (<Link type="button" to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>)
+    }
+}
+
 
 const EventPageComponent = ({ event }) => {
     return (<>
@@ -56,7 +67,7 @@ const EventPageComponent = ({ event }) => {
                     </div>
                     <div class="eventButtonsFlex">
                         {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
-                        <Link type="button" to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>
+                        <BookNowButton event={event} />
                         <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
                         <Link to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>
                     </div>
@@ -77,7 +88,7 @@ const EventPageComponent = ({ event }) => {
             </div>
             <div class="eventReview">
                 <div class="accordion" id="accordionExample">
-                    <ShowReviews id={event.event_id}/>
+                    <ShowReviews id={event.event_id} />
                 </div>
             </div>
         </div>
