@@ -10,9 +10,8 @@ const Filtering = ({events}) => {
     }
 
     const sortEvent = (a, b) => {
-        console.log('SORTING')
-        let fa = a.event_name,
-            fb = b.event_name;
+        let fa = a.event_name.toLowerCase(),
+            fb = b.event_name.toLowerCase();
 
         if (fa < fb) {
                 return -1;
@@ -24,9 +23,8 @@ const Filtering = ({events}) => {
     };
 
     const sortArtist = (a, b) => {
-        console.log('SORTING')
-        let fa = a.artist_name,
-            fb = b.artist_name;
+        let fa = a.artist_name.toLowerCase(),
+            fb = b.artist_name.toLowerCase();
         
         if (fa < fb) {
                 return -1;
@@ -38,9 +36,8 @@ const Filtering = ({events}) => {
     };
         
     const sortGenre = (a, b) => {
-        console.log('SORTING')
-        let fa = a.genre,
-            fb = b.genre;
+        let fa = a.genre.toLowerCase(),
+            fb = b.genre.toLowerCase();
 
         if (fa < fb) {
             return -1;
@@ -52,9 +49,8 @@ const Filtering = ({events}) => {
     };
 
     const sortVenue = (a, b) => {
-        console.log('SORTING')
-        let fa = a.venue_name,
-            fb = b.venue_name;
+        let fa = a.venue_name.toLowerCase(),
+            fb = b.venue_name.toLowerCase();
 
         if (fa < fb) {
                 return -1;
@@ -66,7 +62,6 @@ const Filtering = ({events}) => {
     };
 
     const sortDate = (a, b) => {
-        console.log('SORTING')
         let fa = a.date,
             fb = b.date;
 
@@ -109,7 +104,6 @@ const Filtering = ({events}) => {
 
     
     const sortedEvents = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && !val.includes('https') && val.toLowerCase().includes(search.toLowerCase())));
-
     events = sortedEvents
     
         // useEffect(() => {
