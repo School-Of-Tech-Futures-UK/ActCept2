@@ -51,10 +51,10 @@ const Filtering = ({events}) => {
             return 0;
     };
 
-    const sortLocation = (a, b) => {
+    const sortVenue = (a, b) => {
         console.log('SORTING')
-        let fa = a.location,
-            fb = b.location;
+        let fa = a.venue_name,
+            fb = b.venue_name;
 
         if (fa < fb) {
                 return -1;
@@ -87,8 +87,8 @@ const Filtering = ({events}) => {
         events.sort(sortGenre)
         console.log(events)
         }
-    else if (sortingCategory === 'location'){
-        events.sort(sortLocation)
+    else if (sortingCategory === 'venue'){
+        events.sort(sortVenue)
         console.log(events)
         }
     else if (sortingCategory === 'event_name'){
@@ -108,8 +108,9 @@ const Filtering = ({events}) => {
         }
 
     
-    const filtered = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.toLowerCase().includes(search.toLowerCase())));
-    events = filtered
+    const sortedEvents = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && !val.includes('https') && val.toLowerCase().includes(search.toLowerCase())));
+
+    events = sortedEvents
     
         // useEffect(() => {
         //     console.log(search)
@@ -127,7 +128,7 @@ const Filtering = ({events}) => {
                         <option value = 'artist_name'>Artist Name</option>
                         <option value = 'event_name'>Event Name</option>
                         <option value = 'genre'>Genre</option>
-                        <option value = 'location'>Location</option>
+                        <option value = 'venue'>Venue Name</option>
                         <option value = 'date'>Date</option>
                     </select>
             </div>
