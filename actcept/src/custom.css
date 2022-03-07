@@ -13,6 +13,7 @@
   src: url("../public/Assets/Fonts/Graphik-Semibold.ttf")
 }
 
+
 .body {
     background-color: white;
     font-family: "Graphik-Regular";
@@ -40,8 +41,27 @@ border: 0px;
 .footer {
   background-color: black;
   padding: 20px;
+  padding-left:50px;
+  padding-right: 50px;
+  color: #FFEB32
 }
 
 .bg-dark{
   background-color: black;
+}
+
+#footerTitle{
+  color: white;
+  font-size: min(5vw, 35px);
+  font-family: "Graphik-Semibold";
+}
+
+#footerLine {
+  height:2px;
+  background: linear-gradient(90deg ,#FFEB32, #FF7800);;
+  margin-bottom: 30px;
+}
+
+.link {
+  color: #FF7800
 }
