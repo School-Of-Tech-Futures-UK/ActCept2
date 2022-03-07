@@ -168,8 +168,15 @@
   font-family: "Graphik-Semibold";
 }
 
+
 #heroImage{
   height:min(10vw,300px);
+}
+
+#noMatchingEvents{
+  color: #e08700;
+  font-size: min(5vw, 40px);
+  font-family: "Graphik-Semibold";
 }
 
 .searchWrapper{

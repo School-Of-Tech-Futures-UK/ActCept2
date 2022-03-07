@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const ShowEvents = ({events}) => { 
   console.log('REDNERING')
   if(events.length === 0){
-    return <><br/> <p id="heroSubtitle"> No matching events</p></>
+    return <><br/> <p id="noMatchingEvents"> No matching events</p></>
   }
   return  events.map((e) => (
       <div class="flexWrapper">
@@ -40,7 +40,7 @@ const Event = ({event}) => {
             <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
             <div class="card-body" id="cardFlex">
               <h5 class="card-title"><strong>{event.event_name}</strong></h5>
-              <p class="card-text">{event.artist_name} at {event.venue_name}<br/> {event.genre} <br/> {eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
+              <p class="card-text"><strong>{event.artist_name}</strong> at <strong>{event.venue_name}</strong><br/> {event.genre} <br/> {eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
               {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
               <div id="seeMore">
                 <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>
