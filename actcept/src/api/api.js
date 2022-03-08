@@ -17,6 +17,17 @@ export const fetchEventData = async (id) => {
   return filteredData;
 };
 
+export const fetchVenueData = async (id) => {
+  // const url = `2/events`
+  const results = await fetch('https://venues.sotf2022-01.com/api/venue_info')
+  // console.log(results)
+  const data = await results.json();
+  // console.log(`My data ${data}`)
+  const newID = Number(id)
+  const filteredData = await data.filter((data) => data.venue_id === newID)
+  return filteredData;
+};
+
 export const getRegistrationInfo = async(id) => {
   console.log(`Reg ID ${id}`)
   const newID = Number(id)

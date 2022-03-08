@@ -1,38 +1,67 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchEventData } from "../api/api";
+import { fetchEventData, fetchVenueData, fetchRegistrations } from "../api/api";
 import { getAllReviews } from "../api/api";
 import ShowReviews from "./event_review";
+
+const checkCapacity = (capacity, numRegistered) => {
+    if (numRegistered < capacity) {
+        return false
+    } else {
+        return true
+    }
+}
+
+const fetchData = async (id) => {
+    const eventData = await fetchEventData(id)
+    const venueID = eventData[0].venue_id
+    const registrationsData = await fetchRegistrations(id)
+    const venueData = await fetchVenueData(venueID)
+    const capacity = venueData[0].venue_capacity
+    const numRegistered = registrationsData.length
+    console.log(`capacity ${capacity} numberRegistered ${numRegistered}`)
+    const isFull = checkCapacity(capacity, numRegistered)
+    return [eventData, isFull]
+}
 
 const EventPage = () => {
     const { id } = useParams()
     console.log(id)
 
     const [eventData, setEventData] = useState([]);
+    const [capacityCheck, setCapacityCheck] = useState(false);
 
     useEffect(() => {
-        fetchEventData(id).then(setEventData);
+        fetchData(id).then((returnedValue) => {
+            setEventData(returnedValue[0])
+            setCapacityCheck(returnedValue[1])
+        });
     }, [id]);
     console.log("Hello")
 
+    
     const event = eventData[0]
     console.log(event)
-
+    console.log(`capacity ${capacityCheck}`)
     if (!event) {
         return (
             <div>Loading...</div>
         )
+    } else {
+        return (
+            <EventPageComponent event={event} capacityCheck={capacityCheck} />
+        )
     }
-    return (
-        <EventPageComponent event={event} />
-    )
+
+    
 }
 
-const BookNowButton = ({ event }) => {
+const BookNowButton = ({ event, capacityCheck }) => {
     const eventDate = new Date(event.date)
     const nowDate = new Date()
     nowDate.setHours(0,0,0,0)
-    if (eventDate < nowDate) {
+    console.log(`capacityCheck ${capacityCheck}`)
+    if (eventDate < nowDate || capacityCheck) {
         return (<button type="button" class="btn btn-secondary" id="eventButtonFlex" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Sorry! Cannot book for a past event.">Book Now</button>)
     } else {
         return (<Link type="button" to={`/signup/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Book Now</Link>)
@@ -40,7 +69,7 @@ const BookNowButton = ({ event }) => {
 }
 
 
-const EventPageComponent = ({ event }) => {
+const EventPageComponent = ({ event, capacityCheck }) => {
     let eventImage = `${event.event_image}`
     if (eventImage.includes('http://')) {
     }else if (eventImage.includes('https://')){
@@ -73,7 +102,7 @@ const EventPageComponent = ({ event }) => {
                     </div>
                     <div class="eventButtonsFlex">
                         {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
-                        <BookNowButton event={event} />
+                        <BookNowButton event={event} capacityCheck={capacityCheck}/>
                         <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
                         <Link to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>
                     </div>
