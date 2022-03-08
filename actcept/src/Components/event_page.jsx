@@ -71,6 +71,10 @@ const BookNowButton = ({ event, capacityCheck }) => {
 
 const EventPageComponent = ({ event, capacityCheck }) => {
     let eventImage = `${event.event_image}`
+    const eventDate = `${event.date}`
+    const eventDateYear = eventDate.substring(0,4)
+    const eventDateMonth = eventDate.substring(5,7)
+    const eventDateDay = eventDate.substring(8,10)
     if (eventImage.includes('http://')) {
     }else if (eventImage.includes('https://')){
     } else {
@@ -97,7 +101,7 @@ const EventPageComponent = ({ event, capacityCheck }) => {
                     <div class="card mainDetails card-event-page">
                         <div class="card-body">
                             <h5 class="card-title">{event.event_description}</h5>
-                            <p class="card-text">{event.artist_name} at {event.location} <br /> {event.date}</p>
+                            <p class="card-text">{event.artist_name} at {event.location} <br /> {eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
                         </div>
                     </div>
                     <div class="eventButtonsFlex">
