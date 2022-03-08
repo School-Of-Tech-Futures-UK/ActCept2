@@ -110,8 +110,10 @@ app.post('/send-review', async (req, res) => {
 
 app.get('/getallreviews', async (req, res) => {
   const reviews = await db.query(`SELECT * FROM reviews`)
+  // LEFT JOIN registrations ON reviews.registration_id = registrations.registration_id`)
   res.send(reviews)
 })
+
 
 app.put('/edit-review/:id', async (req, res) => {
   const id = req.params.id

@@ -23,7 +23,7 @@ export const getRegistrationInfo = async(id) => {
   const url = `https://bookings.sotf2022-01.com/api/get-registration/${newID}`
   const results = await fetch(url)
   const data = await results.json();
-  console.log(data)
+  console.log(`These are the reg ${data}`)
   return data;
 };
 
@@ -55,8 +55,8 @@ export const getAllReviews = async () => {
   const url = `https://bookings.sotf2022-01.com/api/getallreviews`
   const results = await fetch(url)
   const data = await results.json();
-  console.log('getAllReviews has been called')
-  console.log(data)
+  // console.log('getAllReviews has been called')
+  // console.log(data)
   return data;
 }
 
