@@ -37,18 +37,11 @@ function Review() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		const registrations = await getRegistrationInfo(id)
-		console.log(`Print registrations ${registrations}`)
 		const newData = registrations.filter((data) => data.user_email === email)
-		console.log(newData)
-		// console.log(`email is ${email}`)
-		// console.log(`NEWDATA is ${newData[0][0]}`)
 		const review_data = await getAllReviews()
-		// // console.log(`NEW data reg IDv${review_data.registration_id}`)
-		const regID = newData.registration_id
-		//console.log(`REG ID is ${regID}`)
+		const regID = newData[0].registration_id
 		const alreadyReviewed = review_data.filter((data) => data.registration_id === regID )
 		
-		// console.log(alreadyReviewed)
 		if (newData.length === 0) {
 			setName('')
 			setEmail('')
