@@ -58,7 +58,7 @@ border: 0px;
 
 #footerLine {
   height:2px;
-  background: linear-gradient(90deg ,#FFEB32, #FF7800);;
+  background: linear-gradient(90deg ,#FFEB32, #FF7800);
   margin-bottom: 30px;
 }
 
@@ -81,16 +81,16 @@ border: 0px;
 
 .accordion-button:not(.collapsed){
   color: black;
-  background-color: #FFEB32;
+  background-color: #FF7800;
   box-shadow:inset 0 0px 0 rgb(0 0 0 / 0%);
 }
 
 .accordion-button:focus{
-  border-color: #FFEB32;
+  border-color: #FF7800;
 }
 
 .accordion-button:hover{
-  background-color: #FF7800;
+  background-color: #FFE4CC;
 }
 
 .accordion-button:not(.collapsed)::after{

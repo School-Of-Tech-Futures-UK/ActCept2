@@ -235,3 +235,40 @@
 .card-event-page{
   height:100px;
 }
+
+#eventTicketFlex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: min(80vw, 800px);
+  margin:auto;
+  margin-top:8vw;
+  height:275px;
+  margin-bottom: 8vw;
+}
+
+#eventTicketInput{
+  flex-grow:1;
+  flex-shrink:1;
+  /* flex-basis:min(60vw, 600px); */
+  background: linear-gradient(90deg ,#FFEB32, #FF7800);
+  border-radius: 2vw;
+  padding: 20px;
+  /* width: 100px; */
+  height:300px;
+}
+
+@media only screen and (min-width: 800px) {
+  #eventTicketImage{
+    background-image: url("../public/Assets/Images/Wave.png");
+    object-fit: contain;
+    background-color: black;
+    background-position: center bottom;
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis:min(15vw, 150px);
+    border-radius:2vw;
+    padding:2vw;
+    height:300px;
+  }
+}

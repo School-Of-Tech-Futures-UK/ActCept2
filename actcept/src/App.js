@@ -7,11 +7,12 @@ import Home from './Components/home';
 import Review from './Components/review';
 import EventPage from './Components/event_page';
 import UserDetails from './Components/signup';
+import Footer from "./Components/footer"
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
 function App() {
-  return (
+  return (<>
     <BrowserRouter>
       <NavigationBar />
       <Routes>
@@ -21,7 +22,8 @@ function App() {
         <Route path="/signup/:id" element={<UserDetails />} />
       </Routes>
     </BrowserRouter>
-  );
+    <Footer />
+  </>);
 }
 
 export default App;

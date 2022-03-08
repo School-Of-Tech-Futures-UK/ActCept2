@@ -48,32 +48,51 @@ function UserDetails() {
 		)
 	}
 
-	return (
-		<>
-			<div style={{ backgroundColor: '#282c34' }}>
-				<Link type="button" to={`/event-page/${id}`} class="btn btn-primary"> ← Back </Link>
-			</div>
-			<div className="App">
-				<header className="App-header">
-
-					<h3>Sign up for</h3>
-					<h1> {eventData[0].event_name} </h1>
+	return (<>
+		<div>
+			<Link type="button" to={`/event-page/${id}`} class="btn btn-primary"> ← Back </Link>
+		</div>
+		<div id="eventTicketFlex">
+			<div id="eventTicketInput">
+			<h3>Your ticket to <strong> {eventData[0].event_name} </strong> </h3>
+			<h5>{eventData[0].artist_name} at {eventData[0].venue_name}</h5>
 					<form class="form-group" onSubmit={handleSubmit}>
 						<label >
 							Name:
-						</label><br />
+						</label>
 						<input type="text" class="form-control input-sm" value={name} required onChange={(e) => (getName(e))} />
 						<label>
 							Email:
-						</label><br />
+						</label>
 						<input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
 						<input class="btn btn-primary" type="submit" value="Book Now" />
 						<div className="message">{message ? <p>{message}</p> : null}</div>
 					</form>
-				</header>
 			</div>
+			{/* <div id="eventTicketImage" media="screen and (max-width: 800px)"></div> */}
+			<div id="eventTicketImage" media="screen and (min-width: 800px)"></div>
+		</div>
 		</>
 	);
 }
 
 export default UserDetails;
+			// <div className="App">
+			// 	<header className="App-header">
+
+			// 		<h3>Sign up for</h3>
+			// 		<h1> {eventData[0].event_name} </h1>
+			// 		<form class="form-group" onSubmit={handleSubmit}>
+			// 			<label >
+			// 				Name:
+			// 			</label><br />
+			// 			<input type="text" class="form-control input-sm" value={name} required onChange={(e) => (getName(e))} />
+			// 			<label>
+			// 				Email:
+			// 			</label><br />
+			// 			<input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
+			// 			<input class="btn btn-primary" type="submit" value="Book Now" />
+			// 			<div className="message">{message ? <p>{message}</p> : null}</div>
+			// 		</form>
+			// 	</header>
+			// </div>

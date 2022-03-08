@@ -2,7 +2,6 @@ import ShowEvents from "./event"
 import { useEffect, useState } from "react";
 import { fetchEvents } from "../api/api";
 import Filtering from "./filtering"
-import Footer from "./footer"
 
 const Home = () => {
     const [events, setEvents] = useState([]);
@@ -20,7 +19,6 @@ const Home = () => {
         <div>
             <Filtering events={events}/>
         </div>
-        <Footer />
     </>)
 
 }
