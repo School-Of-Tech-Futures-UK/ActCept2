@@ -68,6 +68,18 @@ const BookNowButton = ({ event, capacityCheck }) => {
     }
 }
 
+const LeaveReviewButton = ({ event }) => {
+    const eventDate = new Date(event.date)
+    const nowDate = new Date()
+    nowDate.setHours(0,0,0,0)
+    //console.log(`capacityCheck ${capacityCheck}`)
+    if (eventDate > nowDate) {
+        return (<button type="button" class="btn btn-secondary" id="eventButtonFlex" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Sorry! Cannot book for a past event.">Leave a Review</button>)
+    } else {
+        return (<Link type="button" to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>)
+    }
+}
+
 
 const EventPageComponent = ({ event, capacityCheck }) => {
     let eventImage = `${event.event_image}`
@@ -108,13 +120,7 @@ const EventPageComponent = ({ event, capacityCheck }) => {
                         {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
                         <BookNowButton event={event} capacityCheck={capacityCheck}/>
                         <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
-                        <Link to={`/reviews/${event.event_id}`} class="btn btn-primary" id="eventButtonFlex">Leave a Review</Link>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Additional Info</h5>
-                            <p class="card-text">Additional details about the event</p>
-                        </div>
+                        <LeaveReviewButton event = {event} /> 
                     </div>
                 </div>
                 <div id="mapFlex">
