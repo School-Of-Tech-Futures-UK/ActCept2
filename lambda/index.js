@@ -42,6 +42,11 @@ app.get('/api/get-registration/:id', async (req, res) => {
   res.send(data)
 })
 
+app.get('/api/get-registration', async (req, res) => {
+  const data = await db.query(`SELECT * FROM registrations`)
+  res.send(data)
+})
+
 app.put('/api/edit-registration/:id', async (req, res) => {
   const id = req.params.id
   const data = await req.body
