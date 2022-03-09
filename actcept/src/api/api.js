@@ -28,10 +28,8 @@ export const fetchVenueData = async (id) => {
   return filteredData;
 };
 
-export const getRegistrationInfo = async(id) => {
-  console.log(`Reg ID ${id}`)
-  const newID = Number(id)
-  const url = `https://bookings.sotf2022-01.com/api/get-registration/${newID}`
+export const getRegistrationInfo = async() => {
+  const url = `https://bookings.sotf2022-01.com/api/get-registration`
   const results = await fetch(url)
   const data = await results.json();
   console.log(`These are the reg ${data}`)

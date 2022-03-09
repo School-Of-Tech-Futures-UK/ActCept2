@@ -56,8 +56,8 @@ const EventPage = () => {
 }
 
 const ButtonTriggeredModal = ({buttonText, message}) => {
-    return (<div>
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+    return (<>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" id="eventButtonFlex">
             {buttonText}
         </button>
 
@@ -73,7 +73,7 @@ const ButtonTriggeredModal = ({buttonText, message}) => {
                 </div>
             </div>
         </div>
-    </div>)
+    </>)
 }
 
 const BookNowButton = ({ event, capacityCheck }) => {

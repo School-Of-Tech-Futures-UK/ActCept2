@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { postRegistrationInfo, getRegistrationInfo, fetchEventData} from "../api/api";
+import { postRegistrationInfo, fetchRegistrations, fetchEventData} from "../api/api";
 import '../App.css';
 
 function UserDetails() {
@@ -24,7 +24,7 @@ function UserDetails() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		const duplicate = await getRegistrationInfo(id)
+		const duplicate = await fetchRegistrations(id)
 		console.log(`this is my ${id}`)
 		console.log(duplicate)
 		const newData = duplicate.filter((data) => data.user_email === email)

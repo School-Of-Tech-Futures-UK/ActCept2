@@ -15,7 +15,9 @@ const NavigationBar = () => {
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="/"><b> ActCept </b>| Part of GigStr</a>
+          <a  href="/my-events">My Events</a>
         </div>
+
       </nav>
     </>
   );
