@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import { postReview, fetchRegistrations, getAllReviews, fetchEventData } from "../api/api";
 import '../App.css';
@@ -13,6 +13,7 @@ function Review() {
 	const [message, setMessage] = useState("");
 	const [eventData, setEventData] = useState('');
 
+	const navigate = useNavigate();
 
 	const getName = (e) => {
 		setName(e.target.value);
@@ -74,6 +75,7 @@ function Review() {
 
 
 	}
+
 	if (eventData.length === 0) {
 		return (
 			<div>Loading...</div>
@@ -83,7 +85,7 @@ function Review() {
 
 	return (
 		<><div style={{ backgroundColor: '#282c34' }}>
-			<Link type="button" to={`/event-page/${id}`} class="btn btn-primary"> ← Back </Link>
+			<button type="button"  class="btn btn-primary" onClick={() => navigate(-1)}>← Back</button>
 		</div><div className="App">
 				<header className="App-header">
 					<form onSubmit={(e) => (handleSubmit(e))}>

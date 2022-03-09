@@ -75,3 +75,17 @@ export const fetchRegistrations = async (id) => {
   const data = await results.json();
   return data;
 };
+
+
+
+export const deleteRegistration = async (id) => {
+  const newID = Number(id)
+  const  response = await fetch(`https://bookings.sotf2022-01.com/api/delete-registration/${newID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const resJSON = await response.text()
+  return response
+}

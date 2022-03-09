@@ -52,9 +52,6 @@ const Event = ({event}) => {
     
 };
 
-// for (x of results) {
-//   Event(x)
-// }
 
 
 
