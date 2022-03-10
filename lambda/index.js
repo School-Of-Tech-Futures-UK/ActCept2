@@ -4,17 +4,25 @@ const cors = require('cors')
 const bodyParser = require("body-parser")
 const app = express();
 const pg = require('pg-promise')();
+const winston = require('winston');
 app.use(cors())
 app.use(bodyParser.json())
 
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console({ timestamp: true })
+  ]
+})
 
 
 const db = pg({
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 5432,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT || 5432,
 })
 
 // app.get('/api/events', async (req, res) => {
@@ -24,15 +32,37 @@ const db = pg({
 
 
 app.post('/api/send-registration', async (req, res) => {
- 
   const registrationInfo = req.body
+  logger.log({
+    level: 'info',
+    message: 'API request received to register to an event',
+    user_name,
+    user_email,
+    event_id
+  })
   const query = {
     text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
     values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
   }
-  db.query(query).then((results) => {
+  try {
+    const results = await db.query(query)
     res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
-  })
+    logger.log({
+      level: 'info',
+      message: 'A registration has been added',
+      user_id: results[0].registration_id,
+      user_name: results[0].name,
+      event_id: results[0].event_id
+    })
+  } catch (err) {
+    logger.log({
+      level: 'error',
+      message: 'Error in creating the registration',
+      error: err.toString(),
+      event_id
+    })
+    res.status(500).json(`Error in creating the registration ${err.message}`)
+  }
 
 })
 

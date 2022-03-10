@@ -10,6 +10,8 @@ const apigw = require('aws-cdk-lib/aws-apigateway');
 const secrets = require('aws-cdk-lib/aws-secretsmanager');
 const rds = require('aws-cdk-lib/aws-rds');
 const ec2 = require('aws-cdk-lib/aws-ec2');
+const cloudwatch = require('aws-cdk-lib/aws-cloudwatch');
+const logs = require('aws-cdk-lib/aws-logs');
 
 class FullStackDemoStack extends cdk.Stack {
 
@@ -157,6 +159,31 @@ class FullStackDemoStack extends cdk.Stack {
       recordName: `${props?.subDomain}.${props?.domainName}`,
     });
 
+    // Dashboard
+    const newRegistration = new logs.MetricFilter(this, 'New Registration Filter', {
+      metricName: 'newRegistrationRequests',
+      metricNamespace: 'Actcept',
+      logGroup: apiLambda.logGroup,
+      filterPattern: logs.FilterPattern.any(
+        logs.FilterPattern.exists('$.newRegistration')
+      ),
+      defaultValue: 0,
+      metricValue: '$.newRegistration'
+    })
+
+    const dashboard = new cloudwatch.Dashboard(this, 'ActCept Dashboard', {
+      dashboardName: 'ActceptDashboard',
+      widgets: [
+        [
+          new cloudwatch.GraphWidget({
+            statistic: 'Sum',
+            period: cdk.Duration.hours(1),
+            left: [newRegistration.metric()],
+            title: 'New Registration'
+          })
+        ]
+      ]
+    })
 
     // Outputs
     new cdk.CfnOutput(this, "Frontend URL Output", {
