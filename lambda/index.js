@@ -36,9 +36,7 @@ app.post('/api/send-registration', async (req, res) => {
   logger.log({
     level: 'info',
     message: 'API request received to register to an event',
-    user_name,
-    user_email,
-    event_id
+    registrationInfo
   })
   try {
     const query = {
