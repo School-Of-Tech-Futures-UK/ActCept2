@@ -89,3 +89,15 @@ export const deleteRegistration = async (id) => {
   const resJSON = await response.text()
   return response
 }
+
+export const deleteReview = async (id) => {
+  const newID = Number(id)
+  const  response = await fetch(`https://bookings.sotf2022-01.com/api/delete-review/${newID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const resJSON = await response.text()
+  return response
+}

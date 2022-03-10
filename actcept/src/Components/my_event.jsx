@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getRegistrationInfo, fetchEvents, getAllReviews, deleteRegistration } from "../api/api";
+import { getRegistrationInfo, fetchEvents, getAllReviews, deleteRegistration, deleteReview } from "../api/api";
 import star from "../Rating.png";
 
 const getRegisteredEventsInfo = async (email) => {
@@ -30,6 +30,22 @@ const getRegisteredEventsInfo = async (email) => {
     return [eventRegistered[0], pastEvents, futureEvents, userReviews]
 }
 
+const DeleteReviewButton = ({ id }) => {
+    const [message, setMessage] = useState('')
+    const handleClick = async () => {
+        const res = await deleteReview(id)
+        if (res.status !== 500) {
+            setMessage('We have delete your review. Thank you!')
+        }
+    }
+    return (
+        <>
+            <button type="button" class="btn btn-primary" onClick={handleClick}>Delete</button>
+            <div className="message">{message ? <p>{message}</p> : null}</div>
+        </>
+    )
+}
+
 const EventReviewComponent = ({ reviewComponent }) => {
     return (<>
         <div class="accordion-item">
@@ -40,7 +56,7 @@ const EventReviewComponent = ({ reviewComponent }) => {
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    {reviewComponent.review_text}
+                    {reviewComponent.review_text} <DeleteReviewButton id={reviewComponent.review_id} />
                 </div>
             </div>
         </div>
@@ -139,27 +155,40 @@ const Event = ({ event, footerButton }) => {
 
 };
 
-
 const MyEventPage = () => {
     const [email, setEmail] = useState('');
     const [userInfo, setUserInfo] = useState({})
     const [pastEvents, setPastEvents] = useState([])
     const [futureEvents, setFutureEvents] = useState([])
     const [reviews, setReviews] = useState([])
+    const [message, setMessage] = useState('Welcome! Please enter your email. ')
     const handleSubmit = (e) => {
         e.preventDefault()
         getRegisteredEventsInfo(email).then((e) => {
-            setUserInfo(e[0])
-            setPastEvents(e[1])
-            setFutureEvents(e[2])
-            setReviews(e[3])
+            if (e[1].length !== 0) {
+                setEmail('')
+                setUserInfo(e[0])
+                setPastEvents(e[1])
+                setFutureEvents(e[2])
+                setReviews(e[3])
+                setMessage(`Welcome ${userInfo.name}!`)
+            } else {
+                setEmail('')
+                setUserInfo({})
+                setPastEvents([])
+                setFutureEvents([])
+                setReviews([])
+                setMessage('Sorry! We cannot find your information. Please try an other email or go to the homepage and book an event.')
+            }
         })
+        console.log(`userInfo ${userInfo}`)
+        console.log(`email ${email}`)
 
     }
     const getEmail = (e) => { setEmail(e.target.value) }
     return (
         <>
-            <div>Welcome {userInfo.name}! </div>
+            <div>{message} </div>
             <form class="form-group" onSubmit={handleSubmit}>
                 <label>
                     Email:
@@ -167,14 +196,13 @@ const MyEventPage = () => {
                 <input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
                 <input class="btn btn-primary" type="submit" value="Search" />
             </form>
+            <h3>Upcoming Events</h3>
+            <div class="eventWrapper">
+                <ShowFutureEvents events={futureEvents} />
+            </div>
             <h3>Past Events</h3>
             <div class="eventWrapper">
                 <ShowPastEvents events={pastEvents} />
-            </div>
-            <h3>Upcoming Events</h3>
-            <div class="eventWrapper">
-
-                <ShowFutureEvents events={futureEvents} />
             </div>
             <div>
                 <h3>Your Reviews</h3>
