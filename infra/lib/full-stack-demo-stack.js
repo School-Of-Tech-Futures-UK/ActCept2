@@ -177,7 +177,7 @@ class FullStackDemoStack extends cdk.Stack {
         [
           new cloudwatch.GraphWidget({
             statistic: 'Sum',
-            period: cdk.Duration.hours(1),
+            period: cdk.Duration.minutes(1),
             left: [newRegistration.metric()],
             title: 'New Registration'
           })
