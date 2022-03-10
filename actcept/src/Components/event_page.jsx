@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { fetchEventData, fetchVenueData, fetchRegistrations } from "../api/api";
 import { getAllReviews } from "../api/api";
 import ShowReviews from "./event_review";
-import { BsChevronLeft } from "react-icons/bs";
-import { BsPeople } from "react-icons/bs";
-import { BsCalendar2 } from "react-icons/bs";
-import { BsMap } from "react-icons/bs";
+// import { BsChevronLeft } from "react-icons/bs";
+// import { BsPeople } from "react-icons/bs";
+// import { BsCalendar2 } from "react-icons/bs";
+// import { BsMap } from "react-icons/bs";
 
 const checkCapacity = (capacity, numRegistered) => {
     if (numRegistered < capacity) {

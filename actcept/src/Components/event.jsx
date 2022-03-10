@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 // import { fetchCases, fetchCountries } from "../api";
 // import { fetchEvents } from "../api/api";
 // import XXX from '../../public/Assets/Images/Generic_Event.jpg'
-import { BsPeople } from "react-icons/bs";
-import { BsCalendar2 } from "react-icons/bs";
-import { BsPinMap } from "react-icons/bs";
+// import { BsPeople } from "react-icons/bs";
+// import { BsCalendar2 } from "react-icons/bs";
+// import { BsPinMap } from "react-icons/bs";
 
 // https://7xooqvfo8j.execute-api.eu-west-2.amazonaws.com/sprint1
 // https://zuttio2meg.execute-api.eu-west-2.amazonaws.com/sprint1

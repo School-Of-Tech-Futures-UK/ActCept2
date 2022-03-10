@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { postRegistrationInfo, fetchRegistrations, fetchEventData} from "../api/api";
 import '../App.css';
-import { BsChevronLeft } from "react-icons/bs";
+// import { BsChevronLeft } from "react-icons/bs";
 
 function UserDetails() {
 	const { id } = useParams();
