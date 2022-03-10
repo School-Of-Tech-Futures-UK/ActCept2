@@ -26,7 +26,7 @@ const ShowReviews = ({ id }) => {
         fetchData(id).then(setReviewData);
     }, [id]);
     if (reviewData.length === 0) {
-        return <div>There are no reviews</div>
+        return <div>Be the first to leave a review!</div>
     } else {
         console.log(`registrations should be filled: ${reviewData}`)
         return reviewData.map((e) => {

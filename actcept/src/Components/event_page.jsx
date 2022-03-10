@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { fetchEventData, fetchVenueData, fetchRegistrations } from "../api/api";
 import { getAllReviews } from "../api/api";
 import ShowReviews from "./event_review";
+import { BsChevronLeft } from "react-icons/bs";
+import { BsPeople } from "react-icons/bs";
+import { BsCalendar2 } from "react-icons/bs";
+import { BsMap } from "react-icons/bs";
 
 const checkCapacity = (capacity, numRegistered) => {
     if (numRegistered < capacity) {
@@ -116,49 +120,52 @@ const EventPageComponent = ({ event, capacityCheck }) => {
         eventImage = 'https://media.istockphoto.com/photos/we-are-going-to-party-as-if-theres-no-tomorrow-picture-id1279483477?k=20&m=1279483477&s=612x612&w=0&h=xRMcRmn81eX5pJ0J_zIQJUgh1ZrrSiW1q83B3VbeGkw='
     }
     return (<>
-        <Link type="button" to='/' class="btn btn-primary"> ← Home</Link>
-        <div class="eventFlex">
-            <div id="eventHeader">
-                <img id="eventImage" src={eventImage} class="card-img-top" alt="..." />
-                <div id="eventReview">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+        <div class="backgroundProperties">
+            <Link type="button" to='/' class="returnButton"><BsChevronLeft /> Home</Link>
+            <div class="eventFlex">
+                <div id="eventHeader">
+                    <img id="eventImage" src={eventImage} class="card-img-top" alt="..." />
+                    <div id="eventTitle">
+                        <p> {event.event_name}</p>
+                    </div>
                 </div>
-                <div id="eventTitle">
-                    <p> {event.event_name}</p>
-                </div>
-            </div>
-            <div class="eventCardFlex">
-                <div class="eventDetailsFlex" id="childFlex" >
-                    <div class="card mainDetails card-event-page">
-                        <div class="card-body">
-                            <h5 class="card-title">{event.event_description}</h5>
-                            <p class="card-text">{event.artist_name} at {event.location} <br /> {eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
+                <div class="detailsCard">
+                    <div class="eventCardFlex">
+                        <div class="eventDetailsFlex" id="childFlex" >
+                            <div class="card mainDetails card-event-page">
+                                <div class="card-body">
+                                    <h6 class="Date"> <BsCalendar2/> &ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear} at {event.venue_name}</h6>
+                                    <h3 class="card-title card-graphik-bold"><BsPeople/>&ensp;{event.artist_name}</h3>
+                                    <h5 class="card-title">{event.event_description}</h5>
+                                    <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
+                                    <p class="card-text"><BsMap/>&ensp;{event.venue_address} </p>
+                                </div>
+                            </div>
+                            <div class="eventButtonsFlex">
+                                {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
+                                <BookNowButton event={event} capacityCheck={capacityCheck} />
+                                <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
+                                <LeaveReviewButton event={event} />
+                            </div>
+                        </div>
+                        <div id="mapFlex">
+                            <div class="card card-event-page">
+                                <div class="card-body">
+                                    <h5 class="card-title">Map Here</h5>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="eventButtonsFlex">
-                        {/* <button type="button" class="btn btn-primary" id="eventButtonFlex"> Book Now </button> */}
-                        <BookNowButton event={event} capacityCheck={capacityCheck} />
-                        <button type="button" class="btn btn-primary" id="eventButtonFlex"> Add to Shortlist </button>
-                        <LeaveReviewButton event={event} />
-                    </div>
-                </div>
-                <div id="mapFlex">
-                    <div class="card card-event-page">
-                        <div class="card-body">
-                            <h5 class="card-title">Map Here</h5>
+                    <div class="eventReview">
+                        <h5 style = {{ paddingLeft:1 }}><strong> Reviews </strong></h5>
+                        <div class="accordion" id="accordionExample">
+                            <ShowReviews id={event.event_id} />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="eventReview">
-                <div class="accordion" id="accordionExample">
-                    <ShowReviews id={event.event_id} />
-                </div>
-            </div>
+            <br/>
+            <br/>
         </div>
     </>)
 

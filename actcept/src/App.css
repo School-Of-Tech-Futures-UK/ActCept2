@@ -13,6 +13,16 @@
   }
 }
 
+.card-text{
+  margin:0px;
+}
+
+#orangeText{
+  color:#FF7800;
+  font-size:18px;
+  font-family: "Graphik-Semibold";
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -57,6 +67,17 @@
   background-color: #FFEB32;
 }
 
+.btn-group-lg>.btn, .btn-lg{
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  padding-top:0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+  opacity: 1;
+}
+
 /* .btn-primary{
   margin-top:20px;
   border-radius: 12px;
@@ -70,12 +91,16 @@
   padding-right: min(10vw, 150px);
 }
 
+.detailsCard{
+  background-color: white;
+  padding: 20px;
+  border-radius: 30px;
+}
+
 .eventCardFlex{
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-  padding: 20px;
-  border-radius: 30px;
 }
 
 #childFlex{
@@ -88,6 +113,7 @@
   flex-grow: 1;
   flex-shrink: 1;
   padding: 10px;
+  padding-bottom:30px;
 }
 
 .eventDetailsFlex{
@@ -138,6 +164,7 @@
   padding-left: min(5vw,30px);
   bottom: 0;
   left: 0;
+  text-shadow: 0px 0px 15px #000000;
 }
 
 .checked {
@@ -233,7 +260,29 @@
 }
 
 .card-event-page{
-  height:100px;
+  height:auto;
+  justify-content: center;
+}
+
+.card-graphik-bold{
+  font-family: "Graphik-Bold";
+}
+
+.Date{
+  font-size: 14px;
+  font-family: "Graphik-Semibold";
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+#genreIcon{
+  border-radius: 100px;
+  background-color: #FFEB32;
+  color: black;
+  font-size:15px;
+  font-family: "Graphik-Semibold";
+  margin-top: min(1vw,8px);
+  margin-bottom: min(1vw, 8px);
 }
 
 #eventTicketFlex{
@@ -242,9 +291,7 @@
   flex-wrap: wrap;
   width: min(80vw, 800px);
   margin:auto;
-  margin-top:8vw;
-  height:275px;
-  margin-bottom: 8vw;
+  margin-top:6vw;
 }
 
 #eventTicketInput{
@@ -255,7 +302,6 @@
   border-radius: 2vw;
   padding: 20px;
   /* width: 100px; */
-  height:300px;
 }
 
 @media only screen and (min-width: 800px) {
@@ -271,4 +317,10 @@
     padding:2vw;
     height:300px;
   }
+}
+
+.eventReview{
+  padding-bottom:min(5vw, 30px);
+  padding-left:10px;
+  padding-right:10px;
 }
