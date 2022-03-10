@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import { postReview, fetchRegistrations, getAllReviews, fetchEventData } from "../api/api";
 import '../App.css';
-import { BsChevronLeft } from "react-icons/bs";
+// import { BsChevronLeft } from "react-icons/bs";
 
 
 function Review() {
