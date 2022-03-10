@@ -198,25 +198,24 @@ const MyEventPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         getRegisteredEventsInfo(email).then((e) => {
-            if (Object.keys(e[0]).length !== 0) {
-                setEmail('')
-                setUserInfo(e[0])
-                setPastEvents(e[1])
-                setFutureEvents(e[2])
-                setReviews(e[3])
-                setMessage(`Welcome ${userInfo.name}!`)
-            } else {
+            if (!e[0]) {
+                setMessage('Sorry! We cannot find your information. Please try an other email or go to the homepage and book an event.')
                 setEmail('')
                 setUserInfo({})
                 setPastEvents([])
                 setFutureEvents([])
                 setReviews([])
-                setMessage('Sorry! We cannot find your information. Please try an other email or go to the homepage and book an event.')
+            } else {
+                setUserInfo(e[0])
+                setPastEvents(e[1])
+                setFutureEvents(e[2])
+                setReviews(e[3])
+                setMessage(`Welcome!`)
+                setEmail('')
             }
         })
         console.log(`userInfo ${userInfo}`)
         console.log(`email ${email}`)
-
     }
     const getEmail = (e) => { setEmail(e.target.value) }
     return (
@@ -229,6 +228,7 @@ const MyEventPage = () => {
                 <input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
                 <input class="btn btn-primary" type="submit" value="Search" />
             </form>
+            <h3>{userInfo.name}</h3>
             <h3>Upcoming Events</h3>
             <div class="eventWrapper">
                 <ShowFutureEvents events={futureEvents} />
