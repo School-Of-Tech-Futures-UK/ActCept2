@@ -46,27 +46,26 @@ function Review() {
 		if (newData.length !== 0) {
 			regID = newData[0].registration_id
 			alreadyReviewed = review_data.filter((data) => data.registration_id === regID)
+			console.log(`already reviewed ${alreadyReviewed.length}`)
 			if (alreadyReviewed.length !== 0) {
 				setName('')
 				setEmail('')
 				setRating(1)
 				setReview('')
 				setMessage(`Looks like you have already reviewed this event!`)
+			} else {
+				const res = await postReview({ event_id: id, email: email, rating: rating, review_text: review })
+				if (res.status === 201) {
+					setName('')
+					setEmail('')
+					setRating(1)
+					setReview('')
+					setMessage("Your review has been submitted!")
+				} else {
+					setMessage("Oops, there is some error!")
+				}
 			}
-			const res = await postReview({ event_id: id, email: email, rating: rating, review_text: review })
-			if (res.status === 201) {
-				setName('')
-				setEmail('')
-				setRating(1)
-				setReview('')
-				setMessage("Your review has been submitted!")
-			}
-			else {
-				setMessage("Oops, there is some error!")
-			}
-		}
-
-		else {
+		} else {
 			setName('')
 			setEmail('')
 			setRating(1)
