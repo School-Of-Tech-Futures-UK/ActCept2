@@ -86,38 +86,41 @@ function Review() {
 
 
 	return (<>
-		<div style={{ backgroundColor: '#282c34' }}>
-			<Link type="button" to={`/event-page/${id}`} class="returnButton"> <BsChevronLeft/> Return to event</Link>
-		</div><div className="App">
-				<header className="App-header">
+	<div class="backgroundProperties">
+			<Link type="button" to={`/event-page/${id}`} class="returnButton"><BsChevronLeft/>Return to event</Link>
+			<div id="eventTicketFlex">
+				<div id="eventTicketInput">
+				<h3>What did you think of<strong> {eventData[0].event_name}</strong>?</h3>
+				<h5>{eventData[0].artist_name} at {eventData[0].venue_name}</h5>
 					<form onSubmit={(e) => (handleSubmit(e))}>
-						<h3> Leave a review for </h3>
-						<h1>{eventData[0].event_name}</h1>
-						<label>
-							Name:
-						</label><br />
-						<input type="text" value={name} required onChange={(e) => (getName(e))} /><br />
-						<label>
-							Email:
-						</label><br />
-						<input type="email" value={email} required onChange={(e) => (getEmail(e))} /><br />
-						<label>
-							Rating:
-						</label> <br />
-						<select name="rating" id="rating" value={rating} required onChange={(e) => (getRating(e))}>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-						</select> <br />
-						<label> Review </label><br />
-						<textarea type="text" value={review} required onChange={(e) => (getReview(e))} /><br /> <br />
-						<input type="submit" value="Leave a review" />
-						<div className="message">{message ? <p>{message}</p> : null}</div>
-					</form>
-				</header>
-			</div></>
+							<label>
+								Name:
+							</label><br />
+							<input type="text" class="form-control input-sm" value={name} required onChange={(e) => (getName(e))} />
+							<label>
+								Email:
+							</label><br />
+							<input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
+							<label>
+								Rating:
+							</label> <br />
+							<select name="rating" id="rating" value={rating} required onChange={(e) => (getRating(e))}>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select> <br />
+							<label> Review </label><br />
+							<textarea type="text" class="form-control input-sm" value={review} required onChange={(e) => (getReview(e))} />
+							<input type="submit" class="btn btn-primary" value="Leave a review" />
+							<div className="message">{message ? <p>{message}</p> : null}</div>
+						</form>
+				</div>
+			</div>
+			<div><br/><br/></div>
+	</div>
+	</>
 	);
 }
 
