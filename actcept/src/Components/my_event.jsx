@@ -46,6 +46,39 @@ const DeleteReviewButton = ({ id }) => {
     )
 }
 
+// const EditReviewComponent = () => {
+
+
+//     return (
+//         <form onSubmit={(e) => (handleSubmit(e))}>
+// 						<h3> Leave a review for </h3>
+// 						<h1>{eventData[0].event_name}</h1>
+// 						<label>
+// 							Name:
+// 						</label><br />
+// 						<input type="text" value={name} required onChange={(e) => (getName(e))} /><br />
+// 						<label>
+// 							Email:
+// 						</label><br />
+// 						<input type="email" value={email} required onChange={(e) => (getEmail(e))} /><br />
+// 						<label>
+// 							Rating:
+// 						</label> <br />
+// 						<select name="rating" id="rating" value={rating} required onChange={(e) => (getRating(e))}>
+// 							<option value="1">1</option>
+// 							<option value="2">2</option>
+// 							<option value="3">3</option>
+// 							<option value="4">4</option>
+// 							<option value="5">5</option>
+// 						</select> <br />
+// 						<label> Review </label><br />
+// 						<textarea type="text" value={review} required onChange={(e) => (getReview(e))} /><br /> <br />
+// 						<input type="submit" value="Leave a review" />
+// 						<div className="message">{message ? <p>{message}</p> : null}</div>
+// 					</form>
+//     )
+// }
+
 const EventReviewComponent = ({ reviewComponent }) => {
     return (<>
         <div class="accordion-item">
@@ -165,7 +198,7 @@ const MyEventPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         getRegisteredEventsInfo(email).then((e) => {
-            if (e[1].length !== 0) {
+            if (Object.keys(e[0]).length !== 0) {
                 setEmail('')
                 setUserInfo(e[0])
                 setPastEvents(e[1])
