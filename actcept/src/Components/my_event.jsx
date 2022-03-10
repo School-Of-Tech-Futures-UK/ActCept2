@@ -43,7 +43,7 @@ const DeleteReviewButton = ({ id }) => {
     }
     return (
         <>
-            <button type="button" class="btn btn-primary" onClick={handleClick}>Delete</button>
+            <button type="button" class="btn btn-primary" id="myEventButton" onClick={handleClick}>Delete</button>
             <div className="message">{message ? <p>{message}</p> : null}</div>
         </>
     )
@@ -76,7 +76,7 @@ const EditReviewComponent = ({ id }) => {
         }
     }
     return (<>
-        <a type="button" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a type="button" class="btn btn-primary" id="myEventButton" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Edit Review
         </a>
         <div class="collapse" id="collapseExample">
@@ -114,9 +114,8 @@ const EventReviewComponent = ({ reviewComponent }) => {
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    {reviewComponent.review_text}
-                    <EditReviewComponent id={reviewComponent.review_id} />
-                    <DeleteReviewButton id={reviewComponent.review_id} />
+                    {reviewComponent.review_text} &ensp;
+                    <EditReviewComponent id={reviewComponent.review_id} /> &ensp; <DeleteReviewButton id={reviewComponent.review_id} />
                 </div>
             </div>
         </div>
@@ -265,7 +264,7 @@ const MyEventPage = () => {
         <div class="eventFlex">
             <div class="detailsCard">
                 <h4 style = {{ paddingLeft:1 }}><strong>Upcoming Events </strong></h4>
-                <div class="eventWrapper">
+                <div class="eventWrapper" id="myEventsJustify">
                     <ShowFutureEvents events={futureEvents} />
                 </div>
             </div>
@@ -273,7 +272,7 @@ const MyEventPage = () => {
         <div class="eventFlex">
             <div class="detailsCard">
             <h4 style = {{ paddingLeft:1 }}><strong>Past Events </strong></h4>
-                <div class="eventWrapper">
+                <div class="eventWrapper" id="myEventsJustify">
                     <ShowPastEvents events={pastEvents} />
                 </div>
             </div>

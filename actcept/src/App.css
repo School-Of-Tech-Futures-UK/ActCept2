@@ -56,7 +56,15 @@
 .eventWrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+#myEventsJustify{
   justify-content: left;
+}
+
+#myEventButton{
+  margin-top: 0px;
 }
 
 .card {
