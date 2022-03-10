@@ -87,7 +87,7 @@ function Review() {
 
 	return (<>
 		<div style={{ backgroundColor: '#282c34' }}>
-			<Link type="button" to={`/event-page/${id}`} class="returnButton"><BsChevronLeft /> Return to event</Link>
+			<Link type="button" to={`/event-page/${id}`} class="returnButton"> Return to event</Link>
 		</div><div className="App">
 				<header className="App-header">
 					<form onSubmit={(e) => (handleSubmit(e))}>

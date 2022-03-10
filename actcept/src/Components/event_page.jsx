@@ -121,7 +121,7 @@ const EventPageComponent = ({ event, capacityCheck }) => {
     }
     return (<>
         <div class="backgroundProperties">
-            <Link type="button" to='/' class="returnButton"><BsChevronLeft /> Home</Link>
+            <Link type="button" to='/' class="returnButton">Home</Link>
             <div class="eventFlex">
                 <div id="eventHeader">
                     <img id="eventImage" src={eventImage} class="card-img-top" alt="..." />
@@ -134,11 +134,11 @@ const EventPageComponent = ({ event, capacityCheck }) => {
                         <div class="eventDetailsFlex" id="childFlex" >
                             <div class="card mainDetails card-event-page">
                                 <div class="card-body">
-                                    <h6 class="Date"> <BsCalendar2/> &ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear} at {event.venue_name}</h6>
-                                    <h3 class="card-title card-graphik-bold"><BsPeople/>&ensp;{event.artist_name}</h3>
+                                    <h6 class="Date">  &ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear} at {event.venue_name}</h6>
+                                    <h3 class="card-title card-graphik-bold">&ensp;{event.artist_name}</h3>
                                     <h5 class="card-title">{event.event_description}</h5>
                                     <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
-                                    <p class="card-text"><BsMap/>&ensp;{event.venue_address} </p>
+                                    <p class="card-text">&ensp;{event.venue_address} </p>
                                 </div>
                             </div>
                             <div class="eventButtonsFlex">

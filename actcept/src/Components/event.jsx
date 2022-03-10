@@ -43,10 +43,10 @@ const Event = ({event}) => {
             <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
             <div class="card-body" id="cardFlex">
               <h5 class="card-title"><strong>{event.event_name}</strong></h5>
-              <h6 class="card-text" id="orangeText"><strong><BsPeople/>&ensp;{event.artist_name}</strong></h6>
-              <p class="card-text"><BsPinMap/>&ensp;{event.venue_name}</p>
+              <h6 class="card-text" id="orangeText"><strong>&ensp;{event.artist_name}</strong></h6>
+              <p class="card-text">&ensp;{event.venue_name}</p>
               <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
-              <p class="card-text"><BsCalendar2/>&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
+              <p class="card-text">&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
               {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
               <div id="seeMore">
                 <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>

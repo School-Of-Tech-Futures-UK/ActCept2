@@ -51,7 +51,7 @@ function UserDetails() {
 
 	return (<>
 		<div class="backgroundProperties">
-			<Link type="button" to={`/event-page/${id}`} class="returnButton"><BsChevronLeft /> Return to event</Link>
+			<Link type="button" to={`/event-page/${id}`} class="returnButton">Return to event</Link>
 			<div id="eventTicketFlex">
 				<div id="eventTicketInput">
 				<h3>Your ticket to <strong> {eventData[0].event_name} </strong> </h3>
