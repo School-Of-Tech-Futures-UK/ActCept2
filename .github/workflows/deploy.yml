@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - dev
+    logLevel:
+    description: 'Log level'     
+    required: true
+    debug: 'warning'
 
 jobs:
   build-and-deploy:

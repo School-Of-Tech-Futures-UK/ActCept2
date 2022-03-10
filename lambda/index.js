@@ -40,11 +40,11 @@ app.post('/api/send-registration', async (req, res) => {
     user_email,
     event_id
   })
-  const query = {
-    text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
-    values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
-  }
   try {
+    const query = {
+      text: 'INSERT INTO registrations(name, user_email, event_id) VALUES($1, $2, $3) RETURNING *',
+      values: [registrationInfo.name, registrationInfo.user_email, registrationInfo.event_id]
+    }
     const results = await db.query(query)
     res.status(201).send(`A registration has been added with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
     logger.log({
@@ -52,7 +52,8 @@ app.post('/api/send-registration', async (req, res) => {
       message: 'A registration has been added',
       user_id: results[0].registration_id,
       user_name: results[0].name,
-      event_id: results[0].event_id
+      event_id: results[0].event_id,
+      newRegistration: 1
     })
   } catch (err) {
     logger.log({
