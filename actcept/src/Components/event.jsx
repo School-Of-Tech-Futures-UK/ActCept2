@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 // import { fetchCases, fetchCountries } from "../api";
 // import { fetchEvents } from "../api/api";
-// import XXX from '../../public/Assets/Images/Generic_Event.jpg'
-// import { BsPeople } from "react-icons/bs";
-// import { BsCalendar2 } from "react-icons/bs";
-// import { BsPinMap } from "react-icons/bs";
+import { BsPeople } from "react-icons/bs";
+import { BsCalendar2 } from "react-icons/bs";
+import { BsPinMap } from "react-icons/bs";
 
 // https://7xooqvfo8j.execute-api.eu-west-2.amazonaws.com/sprint1
 // https://zuttio2meg.execute-api.eu-west-2.amazonaws.com/sprint1
@@ -43,10 +42,10 @@ const Event = ({event}) => {
             <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
             <div class="card-body" id="cardFlex">
               <h5 class="card-title"><strong>{event.event_name}</strong></h5>
-              <h6 class="card-text" id="orangeText"><strong>&ensp;{event.artist_name}</strong></h6>
-              <p class="card-text">&ensp;{event.venue_name}</p>
+              <h6 class="card-text" id="orangeText"><strong><BsPeople/>&ensp;{event.artist_name}</strong></h6>
+              <p class="card-text"><BsPinMap/>&ensp;{event.venue_name}</p>
               <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
-              <p class="card-text">&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
+              <p class="card-text"><BsCalendar2/>&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
               {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
               <div id="seeMore">
                 <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>
