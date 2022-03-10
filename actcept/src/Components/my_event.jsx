@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getRegistrationInfo, fetchEvents, getAllReviews, deleteRegistration, deleteReview, editReview } from "../api/api";
 import star from "../Rating.png";
+import { BsPeople } from "react-icons/bs";
+import { BsCalendar2 } from "react-icons/bs";
+import { BsPinMap } from "react-icons/bs";
 
 const getRegisteredEventsInfo = async (email) => {
     const allRegistrations = await getRegistrationInfo()
@@ -106,7 +109,7 @@ const EventReviewComponent = ({ reviewComponent }) => {
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div id="rating"> <span><strong>{reviewComponent.name} </strong></span> &emsp;<span id="reviewRating"><img id="reviewStar" src={star} alt="Rating:" height="20px" /> {reviewComponent.rating} </span> {reviewComponent.event_name}</div>
+                    <div id="rating"> {reviewComponent.event_name} <span><strong>{reviewComponent.name} </strong></span> &emsp;<span id="reviewRating"><img id="reviewStar" src={star} alt="Rating:" height="20px" /> {reviewComponent.rating} </span></div>
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -122,7 +125,7 @@ const EventReviewComponent = ({ reviewComponent }) => {
 
 const ShowReviews = ({ reviewData }) => {
     if (reviewData.length === 0) {
-        return <div>There are no reviews</div>
+        return <div>You haven't left any reviews yet</div>
     } else {
         console.log(`registrations should be filled: ${reviewData}`)
         return reviewData.map((e) => {
@@ -195,18 +198,21 @@ const Event = ({ event, footerButton }) => {
     const eventDateMonth = eventDate.substring(5, 7)
     const eventDateDay = eventDate.substring(8, 10)
     return <>
-        <div class="cardWrapper">
-            <div class="card" style={{ width: '18rem' }}>
-                <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
-                <div class="card-body" id="cardFlex">
-                    <h5 class="card-title"><strong>{event.event_name}</strong></h5>
-                    <p class="card-text"><strong>{event.artist_name}</strong> at <strong>{event.venue_name}</strong><br /> {event.genre} <br /> {eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
-                    {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
-                    <div id="seeMore">
-                        {footerButton}
-                    </div>
-                </div>
+    <div class="cardWrapper">
+          <div class="card" style={{width: '18rem'}}>
+            <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
+            <div class="card-body" id="cardFlex">
+              <h5 class="card-title"><strong>{event.event_name}</strong></h5>
+              <h6 class="card-text" id="orangeText"><strong><BsPeople/>&ensp;{event.artist_name}</strong></h6>
+              <p class="card-text"><BsPinMap/>&ensp;{event.venue_name}</p>
+              <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
+              <p class="card-text"><BsCalendar2/>&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
+              {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
+              <div id="seeMore">
+                {footerButton}
+              </div>
             </div>
+          </div>
         </div>
     </>;
 
@@ -244,7 +250,9 @@ const MyEventPage = () => {
     const getEmail = (e) => { setEmail(e.target.value) }
     return (
         <>
-            <div>{message} </div>
+        <div class="backgroundProperties">
+         <div class="heroHeader">
+            <p id="heroSubtitle"> {message}</p>
             <form class="form-group" onSubmit={handleSubmit}>
                 <label>
                     Email:
@@ -252,19 +260,33 @@ const MyEventPage = () => {
                 <input type="email" class="form-control input-sm" value={email} required onChange={(e) => (getEmail(e))} />
                 <input class="btn btn-primary" type="submit" value="Search" />
             </form>
-            <h3>{userInfo.name}</h3>
-            <h3>Upcoming Events</h3>
-            <div class="eventWrapper">
-                <ShowFutureEvents events={futureEvents} />
+        </div>
+        <p id="userDetails">{userInfo.name}</p>
+        <div class="eventFlex">
+            <div class="detailsCard">
+                <h4 style = {{ paddingLeft:1 }}><strong>Upcoming Events </strong></h4>
+                <div class="eventWrapper">
+                    <ShowFutureEvents events={futureEvents} />
+                </div>
             </div>
-            <h3>Past Events</h3>
-            <div class="eventWrapper">
-                <ShowPastEvents events={pastEvents} />
+        </div>
+        <div class="eventFlex">
+            <div class="detailsCard">
+            <h4 style = {{ paddingLeft:1 }}><strong>Past Events </strong></h4>
+                <div class="eventWrapper">
+                    <ShowPastEvents events={pastEvents} />
+                </div>
             </div>
-            <div>
-                <h3>Your Reviews</h3>
+        </div>
+        <div class="eventFlex">
+            <div class="detailsCard">
+            <h4 style = {{ paddingLeft:1 }}><strong>Your Reviews</strong></h4>
                 <ShowReviews reviewData={reviews} />
             </div>
+        </div>
+        <br/>
+        <br/>
+        </div>
         </>
     )
 }

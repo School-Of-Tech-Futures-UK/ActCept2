@@ -56,7 +56,7 @@
 .eventWrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
 
 .card {
@@ -323,4 +323,12 @@
   padding-bottom:min(5vw, 30px);
   padding-left:10px;
   padding-right:10px;
+}
+
+#userDetails{
+  font-family: "Graphik-Bold";
+  font-size:30px;
+  padding-top:min(5vw, 30px);
+  padding-left:min(10vw, 150px);
+  padding-right:min(10vw, 150px);
 }
