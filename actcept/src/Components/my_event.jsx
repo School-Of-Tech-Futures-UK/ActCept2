@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getRegistrationInfo, fetchEvents, getAllReviews, deleteRegistration, deleteReview } from "../api/api";
+import { getRegistrationInfo, fetchEvents, getAllReviews, deleteRegistration, deleteReview, editReview } from "../api/api";
 import star from "../Rating.png";
 
 const getRegisteredEventsInfo = async (email) => {
@@ -46,38 +46,60 @@ const DeleteReviewButton = ({ id }) => {
     )
 }
 
-// const EditReviewComponent = () => {
+const EditReviewComponent = ({ id }) => {
+    const [rating, setRating] = useState(1);
+    const [reviewText, setReviewText] = useState('');
+    const [message, setMessage] = useState("");
 
+    const getRating = (e) => {
+        setRating(e.target.value);
+    }
 
-//     return (
-//         <form onSubmit={(e) => (handleSubmit(e))}>
-// 						<h3> Leave a review for </h3>
-// 						<h1>{eventData[0].event_name}</h1>
-// 						<label>
-// 							Name:
-// 						</label><br />
-// 						<input type="text" value={name} required onChange={(e) => (getName(e))} /><br />
-// 						<label>
-// 							Email:
-// 						</label><br />
-// 						<input type="email" value={email} required onChange={(e) => (getEmail(e))} /><br />
-// 						<label>
-// 							Rating:
-// 						</label> <br />
-// 						<select name="rating" id="rating" value={rating} required onChange={(e) => (getRating(e))}>
-// 							<option value="1">1</option>
-// 							<option value="2">2</option>
-// 							<option value="3">3</option>
-// 							<option value="4">4</option>
-// 							<option value="5">5</option>
-// 						</select> <br />
-// 						<label> Review </label><br />
-// 						<textarea type="text" value={review} required onChange={(e) => (getReview(e))} /><br /> <br />
-// 						<input type="submit" value="Leave a review" />
-// 						<div className="message">{message ? <p>{message}</p> : null}</div>
-// 					</form>
-//     )
-// }
+    const getReview = (e) => {
+        setReviewText(e.target.value);
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const review = { rating: rating, text: reviewText }
+        console.log(`edit review ${review}`)
+        const res = await editReview(id, review)
+        if (res.status === 200) {
+            setRating(1)
+            setReviewText('')
+            setMessage("Your review has been submitted!")
+        }
+        else {
+            setMessage("Oops, there is some error!")
+        }
+    }
+    return (<>
+        <a type="button" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Edit Review
+        </a>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <form onSubmit={(e) => (handleSubmit(e))}>
+                    <label>
+                        Rating:
+                    </label> <br />
+                    <select name="rating" id="rating" value={rating} required onChange={(e) => (getRating(e))}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select> <br />
+                    <label> Review </label><br />
+                    <textarea type="text" value={reviewText} required onChange={(e) => (getReview(e))} /><br /> <br />
+                    <input type="submit" value="Submit" />
+                    <div className="message">{message ? <p>{message}</p> : null}</div>
+                </form>
+            </div>
+        </div>
+
+    </>
+    )
+}
 
 const EventReviewComponent = ({ reviewComponent }) => {
     return (<>
@@ -89,7 +111,9 @@ const EventReviewComponent = ({ reviewComponent }) => {
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    {reviewComponent.review_text} <DeleteReviewButton id={reviewComponent.review_id} />
+                    {reviewComponent.review_text}
+                    <EditReviewComponent id={reviewComponent.review_id} />
+                    <DeleteReviewButton id={reviewComponent.review_id} />
                 </div>
             </div>
         </div>

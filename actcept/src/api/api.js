@@ -28,7 +28,7 @@ export const fetchVenueData = async (id) => {
   return filteredData;
 };
 
-export const getRegistrationInfo = async() => {
+export const getRegistrationInfo = async () => {
   const url = `https://bookings.sotf2022-01.com/api/get-registration`
   const results = await fetch(url)
   const data = await results.json();
@@ -49,7 +49,7 @@ export const postRegistrationInfo = async (registrationInfo) => {
 }
 
 export const postReview = async (review) => {
-  const  response = await fetch('https://bookings.sotf2022-01.com/api/send-review', {
+  const response = await fetch('https://bookings.sotf2022-01.com/api/send-review', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ export const fetchRegistrations = async (id) => {
 
 export const deleteRegistration = async (id) => {
   const newID = Number(id)
-  const  response = await fetch(`https://bookings.sotf2022-01.com/api/delete-registration/${newID}`, {
+  const response = await fetch(`https://bookings.sotf2022-01.com/api/delete-registration/${newID}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ export const deleteRegistration = async (id) => {
 
 export const deleteReview = async (id) => {
   const newID = Number(id)
-  const  response = await fetch(`https://bookings.sotf2022-01.com/api/delete-review/${newID}`, {
+  const response = await fetch(`https://bookings.sotf2022-01.com/api/delete-review/${newID}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -101,3 +101,17 @@ export const deleteReview = async (id) => {
   const resJSON = await response.text()
   return response
 }
+
+export const editReview = async (id, review) => {
+  const newID = Number(id)
+  const response = await fetch(`https://bookings.sotf2022-01.com/api/edit-review/${newID}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(review)
+  })
+  const resJSON = await response.text()
+  return response
+}
+
