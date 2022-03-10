@@ -78,39 +78,6 @@ class FullStackDemoStack extends cdk.Stack {
 
     const cert = acm.Certificate.fromCertificateArn(this, "cert", `arn:aws:acm:us-east-1:${props?.env.account}:certificate/${props?.certId}`);
 
-    // const distribution = new cloudfront.CloudFrontWebDistribution(this, 'Cloudfront', {
-    //   originConfigs: [
-    //     {
-    //       customOriginSource: {
-    //         domainName: `${apiGateway.restApiId}.execute-api.${this.region}.${this.urlSuffix}`,
-    //         originPath: `/${apiGateway.deploymentStage.stageName}`
-    //       },
-    //       behaviors: [{
-    //         allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-    //         pathPattern: 'api/*',
-    //         defaultTtl: cdk.Duration.millis(0)
-    //       }],
-    //     },
-    //     {
-    //       s3OriginSource: {
-    //         s3BucketSource: bucket,
-    //         originAccessIdentity,
-    //       },
-    //       behaviors: [{
-    //         isDefaultBehavior: true,
-    //         functionAssociations: [{
-    //           eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
-    //           function: new cloudfront.Function(this, 'Cloudfront Redirect Function', {
-    //             code: cloudfront.FunctionCode.fromFile({ filePath: "functions/redirect.js" }),
-    //           })
-    //         }]
-    //       }],
-    //     }
-    //   ],
-    //   viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(cert, { aliases: [`${props.subDomain}.${props.domainName}`] }),
-    //   priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
-    // });
-
     const distribution = new cloudfront.Distribution(this, 'Cloudfront', {
       defaultBehavior: {
         origin: new origins.S3Origin(bucket, { originAccessIdentity }),
@@ -171,15 +138,48 @@ class FullStackDemoStack extends cdk.Stack {
       metricValue: '$.newRegistration'
     })
 
+    const newReview = new logs.MetricFilter(this, 'New Review Filter', {
+      metricName: 'newReviewRequests',
+      metricNamespace: 'Actcept',
+      logGroup: apiLambda.logGroup,
+      filterPattern: logs.FilterPattern.any(
+        logs.FilterPattern.exists('$.newReview')
+      ),
+      defaultValue: 0,
+      metricValue: '$.newReview'
+    })
+
+
+
     const dashboard = new cloudwatch.Dashboard(this, 'ActCept Dashboard', {
       dashboardName: 'ActceptDashboard',
       widgets: [
         [
           new cloudwatch.GraphWidget({
             statistic: 'Sum',
-            period: cdk.Duration.minutes(1),
+            period: cdk.Duration.hours(1),
             left: [newRegistration.metric()],
             title: 'New Registration'
+          }),
+          new cloudwatch.GraphWidget({
+            statistic: 'Sum',
+            period: cdk.Duration.hours(1),
+            left: [newReview.metric()],
+            title: 'New Review'
+          })
+        ],
+        [
+          new cloudwatch.GraphWidget({
+            statistic: 'Sum',
+            period: cdk.Duration.hours(1),
+            left: [apiGateway.metricCount()],
+            title: 'API Requests'
+          }),
+          new cloudwatch.GraphWidget({
+            statistic: 'Sum',
+            period: cdk.Duration.hours(1),
+            left: [apiGateway.metricServerError()],
+            title: 'Server Errors'
           })
         ]
       ]

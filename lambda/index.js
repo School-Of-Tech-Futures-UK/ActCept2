@@ -98,25 +98,43 @@ app.delete('/api/delete-registration/:id', async (req, res) => {
 })
 
 app.post('/api/send-review', async (req, res) => {
-
   const review = await req.body
-  console.log('review:')
-  console.log(review)
-  const registration_id = await db.query(`SELECT registration_id FROM registrations WHERE user_email='${review.email}' AND event_id=${review.event_id}`)
-  console.log('reID')
-  console.log(registration_id)
-  if (registration_id === []) {
-    res.status(501).send(`Invalid registration ID`)
-  } else {
-    const query = {
-      text: 'INSERT INTO reviews (registration_id, event_id, rating, review_text) VALUES($1, $2, $3, $4) RETURNING *',
-      values: [registration_id[0].registration_id, review.event_id, review.rating, review.review_text]
-    }
-    db.query(query).then((results) => {
+  logger.log({
+    level: 'info',
+    message: 'API request received to leave a review',
+    review
+  })
+  try {
+    const registration_id = await db.query(`SELECT registration_id FROM registrations WHERE user_email='${review.email}' AND event_id=${review.event_id}`)
+    if (registration_id === []) {
+      res.status(501).send(`Invalid registration ID`)
+    } else {
+      const query = {
+        text: 'INSERT INTO reviews (registration_id, event_id, rating, review_text) VALUES($1, $2, $3, $4) RETURNING *',
+        values: [registration_id[0].registration_id, review.event_id, review.rating, review.review_text]
+      }
+      const results = await db.query(query)
       res.status(201).send(`A review has been added with ID ${results[0].review_id} by the user with ID ${results[0].registration_id} to Event ${results[0].event_id}`)
+      logger.log({
+        level: 'info',
+        message: 'A review has been added',
+        user_id: results[0].registration_id,
+        event_id: results[0].event_id,
+        review_id: results[0].review_id,
+        newReview: 1
+      })
+    }
+  } catch (err) {
+    logger.log({
+      level: 'error',
+      message: 'Error in creating the registration',
+      error: err.toString(),
+      event_id
     })
-
+    res.status(500).json(`Error in creating the registration ${err.message}`)
   }
+
+
 })
 
 app.get('/api/getallreviews', async (req, res) => {
