@@ -10,9 +10,8 @@ const Filtering = ({events}) => {
     }
 
     const sortEvent = (a, b) => {
-        console.log('SORTING')
-        let fa = a.event_name,
-            fb = b.event_name;
+        let fa = a.event_name.toLowerCase(),
+            fb = b.event_name.toLowerCase();
 
         if (fa < fb) {
                 return -1;
@@ -24,9 +23,8 @@ const Filtering = ({events}) => {
     };
 
     const sortArtist = (a, b) => {
-        console.log('SORTING')
-        let fa = a.artist_name,
-            fb = b.artist_name;
+        let fa = a.artist_name.toLowerCase(),
+            fb = b.artist_name.toLowerCase();
         
         if (fa < fb) {
                 return -1;
@@ -38,9 +36,8 @@ const Filtering = ({events}) => {
     };
         
     const sortGenre = (a, b) => {
-        console.log('SORTING')
-        let fa = a.genre,
-            fb = b.genre;
+        let fa = a.genre.toLowerCase(),
+            fb = b.genre.toLowerCase();
 
         if (fa < fb) {
             return -1;
@@ -51,10 +48,9 @@ const Filtering = ({events}) => {
             return 0;
     };
 
-    const sortLocation = (a, b) => {
-        console.log('SORTING')
-        let fa = a.location,
-            fb = b.location;
+    const sortVenue = (a, b) => {
+        let fa = a.venue_name.toLowerCase(),
+            fb = b.venue_name.toLowerCase();
 
         if (fa < fb) {
                 return -1;
@@ -66,7 +62,6 @@ const Filtering = ({events}) => {
     };
 
     const sortDate = (a, b) => {
-        console.log('SORTING')
         let fa = a.date,
             fb = b.date;
 
@@ -87,8 +82,8 @@ const Filtering = ({events}) => {
         events.sort(sortGenre)
         console.log(events)
         }
-    else if (sortingCategory === 'location'){
-        events.sort(sortLocation)
+    else if (sortingCategory === 'venue'){
+        events.sort(sortVenue)
         console.log(events)
         }
     else if (sortingCategory === 'event_name'){
@@ -108,30 +103,34 @@ const Filtering = ({events}) => {
         }
 
     
-    const filtered = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.toLowerCase().includes(search.toLowerCase())));
-    events = filtered
+    const sortedEvents = events.filter(entry => Object.values(entry).some(val => typeof val === "string" && !val.includes('https') && val.toLowerCase().includes(search.toLowerCase())));
+    events = sortedEvents
     
         // useEffect(() => {
         //     console.log(search)
         //     }, [search]);
 
-    return (
-        <div class="flexWrapper">
-                <p>Search</p>
-                <input type="text" value={search} required onChange={(e) => (getSearch(e))} />
+    return (<>
+        <div class="searchWrapper">
+            <div class="searchChildWrapper">
+                <p>Search  </p>
+                <input id="searchBar" type="text" placeholder="" value={search} required onChange={(e) => (getSearch(e))} />
+            </div>
+            <div class="searchChildWrapper">
                 <p>Sort by:</p>
-                <select onChange={sortSelect}>
-                    <option value = 'artist_name'>Artist Name</option>
-                    <option value = 'event_name'>Event Name</option>
-                    <option value = 'genre'>Genre</option>
-                    <option value = 'location'>Location</option>
-                    <option value = 'date'>Date</option>
-                </select>
-                <div class="eventWrapper"> 
-                <ShowEvents events={events}/>
-                </div>
+                    <select onChange={sortSelect}>
+                        <option value = 'artist_name'>Artist Name</option>
+                        <option value = 'event_name'>Event Name</option>
+                        <option value = 'genre'>Genre</option>
+                        <option value = 'venue'>Venue Name</option>
+                        <option value = 'date'>Date</option>
+                    </select>
+            </div>
         </div>
-    )
+            <div class="eventWrapper"> 
+            <ShowEvents events={events}/>
+            </div>
+        </>)
 
   }
 

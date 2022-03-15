@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 // import { fetchCases, fetchCountries } from "../api";
 // import { fetchEvents } from "../api/api";
+import { BsPeople } from "react-icons/bs";
+import { BsCalendar2 } from "react-icons/bs";
+import { BsPinMap } from "react-icons/bs";
 
 // https://7xooqvfo8j.execute-api.eu-west-2.amazonaws.com/sprint1
 // https://zuttio2meg.execute-api.eu-west-2.amazonaws.com/sprint1
@@ -10,6 +13,9 @@ import { Link } from "react-router-dom";
 
 const ShowEvents = ({events}) => { 
   console.log('REDNERING')
+  if(events.length === 0){
+    return <><br/> <p id="noMatchingEvents"> No matching events</p></>
+  }
   return  events.map((e) => (
       <div class="flexWrapper">
       <Event event={e} />
@@ -19,15 +25,31 @@ const ShowEvents = ({events}) => {
 
 const Event = ({event}) => {
   const eventURL = `/event-page/${event.event_id}`
+  let eventImage = `${event.event_image}`
+  if (eventImage.includes('http://')) {
+  }else if (eventImage.includes('https://')){
+  } else {
+    eventImage = 'https://media.istockphoto.com/photos/we-are-going-to-party-as-if-theres-no-tomorrow-picture-id1279483477?k=20&m=1279483477&s=612x612&w=0&h=xRMcRmn81eX5pJ0J_zIQJUgh1ZrrSiW1q83B3VbeGkw='
+  }
+  const eventDate = `${event.date}`
+  console.log(eventDate)
+  const eventDateYear = eventDate.substring(0,4)
+  const eventDateMonth = eventDate.substring(5,7)
+  const eventDateDay = eventDate.substring(8,10)
         return <>
         <div class="cardWrapper">
           <div class="card" style={{width: '18rem'}}>
-            <img src={`${event.event_image}`} class="card-img-top roundedImage" alt="..." />
-            <div class="card-body">
+            <img src={`${eventImage}`} class="card-img-top roundedImage" alt="..." onerror="standby()" />
+            <div class="card-body" id="cardFlex">
               <h5 class="card-title"><strong>{event.event_name}</strong></h5>
-              <p class="card-text">{event.artist_name} <br/> {event.date}</p>
+              <h6 class="card-text" id="orangeText"><strong><BsPeople/>&ensp;{event.artist_name}</strong></h6>
+              <p class="card-text"><BsPinMap/>&ensp;{event.venue_name}</p>
+              <button type="button" class="btn btn-primary btn-lg disabled" id="genreIcon"> {event.genre} </button>
+              <p class="card-text"><BsCalendar2/>&ensp;{eventDateDay}-{eventDateMonth}-{eventDateYear}</p>
               {/* <a href={eventURL} class="btn btn-primary">See more </a> */}
-              <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>
+              <div id="seeMore">
+                <Link to={eventURL} type="button" class="btn btn-primary">See more</Link>
+              </div>
             </div>
           </div>
         </div>
@@ -35,9 +57,6 @@ const Event = ({event}) => {
     
 };
 
-// for (x of results) {
-//   Event(x)
-// }
 
 
 

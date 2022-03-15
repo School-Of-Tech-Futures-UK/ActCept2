@@ -13,6 +13,16 @@
   }
 }
 
+.card-text{
+  margin:0px;
+}
+
+#orangeText{
+  color:#FF7800;
+  font-size:18px;
+  font-family: "Graphik-Semibold";
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -45,20 +55,35 @@
 
 .eventWrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* .body {
-  background-color: #E2E6EA;
+#myEventsJustify{
+  justify-content: left;
+}
+
+#myEventButton{
+  margin-top: 0px;
 }
 
 .card {
-  border-radius: 15px;
-  background-color: #E2E6EA;
-  border-width: 0px;
-} */
+  height:475px;
+}
 
 .mainDetails {
   background-color: #FFEB32;
+}
+
+.btn-group-lg>.btn, .btn-lg{
+  padding-left:0.5rem;
+  padding-right:0.5rem;
+  padding-top:0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+  opacity: 1;
 }
 
 /* .btn-primary{
@@ -69,21 +94,26 @@
 } */
 
 .eventFlex{
-  padding-top: 30px;
-  padding-left: 250px;
-  padding-right: 250px;
+  padding-top: min(10vw, 30px);
+  padding-left: min(10vw, 150px);
+  padding-right: min(10vw, 150px);
 }
 
-.eventCardFlex{
-  display: flex;
+.detailsCard{
   background-color: white;
   padding: 20px;
   border-radius: 30px;
 }
 
+.eventCardFlex{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
 #childFlex{
-  flex-grow: 2;
-  flex-shrink: 2;
+  flex-grow: 1;
+  flex-shrink: 1;
   padding: 10px;
 }
 
@@ -91,6 +121,7 @@
   flex-grow: 1;
   flex-shrink: 1;
   padding: 10px;
+  padding-bottom:30px;
 }
 
 .eventDetailsFlex{
@@ -101,12 +132,15 @@
 
 .eventButtonsFlex{
   display:flex;
+  flex-wrap: wrap;
+  padding-top: min(1vw,5px);
+  padding-bottom: min(1vw,5px);
 }
 
 #eventButtonFlex{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 20px;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
+  margin-right: 1vw;
 }
 
 #eventHeader{
@@ -118,6 +152,8 @@
 #eventImage{
     position: relative;
     border-radius: 30px;
+    height:min(60vw,350px);
+    object-fit: cover;
 }
 
 #eventReview{
@@ -130,12 +166,13 @@
 
 #eventTitle{
   color: white;
-  font-size: 40px;
+  font-size: min(7vw, 40px);
   font-weight: 900;
   position: absolute;
-  padding-left: 30px;
+  padding-left: min(5vw,30px);
   bottom: 0;
   left: 0;
+  text-shadow: 0px 0px 15px #000000;
 }
 
 .checked {
@@ -155,10 +192,151 @@
   background-position: center;
   z-index:-1;
   object-fit: cover;
-  height:300px;
   background-color: black;
   color: white;
+  padding: 3vw;
+  padding-left:5vw;
+  padding-top:5vw;
+}
+
+#heroSubtitle{
+  color: #FFEB32;
+  font-size: min(5vw, 40px);
+  font-family: "Graphik-Semibold";
+}
+
+
+#heroImage{
+  height:min(10vw,300px);
+}
+
+#noMatchingEvents{
+  color: #e08700;
+  font-size: min(5vw, 40px);
+  font-family: "Graphik-Semibold";
+}
+
+.searchWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchChildWrapper{
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top:1vw;
+}
+
+#searchBar{
+  border-radius: 15px;
+}
+
+#cardFlex{
+  position:relative;
+}
+
+#seeMore{
+  position:absolute;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  bottom: 0;
+  left: 0
+}
+
+#reviewRating{
+  background-color: white;
+  border: 0px solid black;
+  padding: 5px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 20px;
+  font-family: "Graphik-Bold";
+  justify-content: center;
+}
+
+#rating{
+  justify-content: center;
+  align-items: center;
+}
+
+#reviewStar{
+  height:23px;
+  padding-bottom:6px;
+  padding-right:3px
+}
+
+.card-event-page{
+  height:auto;
+  justify-content: center;
+}
+
+.card-graphik-bold{
+  font-family: "Graphik-Bold";
+}
+
+.Date{
+  font-size: 14px;
+  font-family: "Graphik-Semibold";
+  color: #6c757d;
+  text-transform: uppercase;
+}
+
+#genreIcon{
+  border-radius: 100px;
+  background-color: #FFEB32;
+  color: black;
+  font-size:15px;
+  font-family: "Graphik-Semibold";
+  margin-top: min(1vw,8px);
+  margin-bottom: min(1vw, 8px);
+}
+
+#eventTicketFlex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: min(80vw, 800px);
+  margin:auto;
+  margin-top:6vw;
+}
+
+#eventTicketInput{
+  flex-grow:1;
+  flex-shrink:1;
+  /* flex-basis:min(60vw, 600px); */
+  background: linear-gradient(90deg ,#FFEB32, #FF7800);
+  border-radius: 2vw;
   padding: 20px;
-  padding-left:100px;
-  padding-top:50px;
+  /* width: 100px; */
+}
+
+@media only screen and (min-width: 800px) {
+  #eventTicketImage{
+    background-image: url("../public/Assets/Images/Wave.png");
+    object-fit: contain;
+    background-color: black;
+    background-position: center bottom;
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis:min(15vw, 150px);
+    border-radius:2vw;
+    padding:2vw;
+    height:300px;
+  }
+}
+
+.eventReview{
+  padding-bottom:min(5vw, 30px);
+  padding-left:10px;
+  padding-right:10px;
+}
+
+#userDetails{
+  font-family: "Graphik-Bold";
+  font-size:30px;
+  padding-top:min(5vw, 30px);
+  padding-left:min(10vw, 150px);
+  padding-right:min(10vw, 150px);
 }

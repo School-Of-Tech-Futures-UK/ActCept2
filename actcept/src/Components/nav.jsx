@@ -12,12 +12,12 @@ const NavigationBar = () => {
   return (
     // <label>{pathname}</label>
     <>
-      <nav class="navbar navbar-dark bg-dark">
+      <nav class="navbar navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="/"><b> ActCept </b>| Part of GigStr</a>
-          <NavLink class="navbar-brand" to="/reviews">Review</NavLink>
-          <NavLink class="navbar-brand" to="/events">Events</NavLink>
+          <a  href="/my-events">My Events</a>
         </div>
+
       </nav>
     </>
   );

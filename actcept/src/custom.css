@@ -13,6 +13,7 @@
   src: url("../public/Assets/Fonts/Graphik-Semibold.ttf")
 }
 
+
 .body {
     background-color: white;
     font-family: "Graphik-Regular";
@@ -37,17 +38,78 @@ border: 0px;
     border: 0px;
 }
 
+.btn-secondary{
+  border:0px;
+  border-radius:12px;
+}
+
 .footer {
   background-color: black;
   padding: 20px;
+  padding-left:50px;
+  padding-right: 50px;
+  color: #FFEB32
 }
 
 .bg-dark{
-  background-color: black;
+  background-color: rgba(var(--bs-black-rgb),var(--bs-bg-opacity))!important;
 }
 
-#heroSubtitle{
-  color: #FFEB32;
-  font-size: 35px;
+#footerTitle{
+  color: white;
+  font-size: min(5vw, 35px);
   font-family: "Graphik-Semibold";
+}
+
+#footerLine {
+  height:2px;
+  background: linear-gradient(90deg ,#FFEB32, #FF7800);
+  margin-bottom: 30px;
+}
+
+.link {
+  color: #FF7800
+}
+
+.accordion-item{
+  border:0px;
+}
+
+.accordion-button{
+  background-color: #FFE4CC;
+}
+
+.accordion-item:first-of-type .accordion-button{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.accordion-button:not(.collapsed){
+  color: black;
+  background-color: #FF7800;
+  box-shadow:inset 0 0px 0 rgb(0 0 0 / 0%);
+}
+
+.accordion-button:focus{
+  border-color: #FF7800;
+}
+
+.accordion-button:hover{
+  background-color: #FFE4CC;
+}
+
+.accordion-button:not(.collapsed)::after{
+  background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
+}
+
+.backgroundProperties{
+  background-color: #E2E6EA;
+}
+
+.returnButton{
+  padding-top:min(10vw, 30px);
+  padding-left: min(10vw, 150px);
+  text-decoration: none;
+  font-family: "Graphik-Semibold";
+  font-size: 20px;
 }

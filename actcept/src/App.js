@@ -7,11 +7,13 @@ import Home from './Components/home';
 import Review from './Components/review';
 import EventPage from './Components/event_page';
 import UserDetails from './Components/signup';
+import Footer from "./Components/footer"
+import MyEventPage from './Components/my_event';
 
 const { BrowserRouter, Route, Routes } = reactRouterDom;
 
 function App() {
-  return (
+  return (<>
     <BrowserRouter>
       <NavigationBar />
       <Routes>
@@ -19,9 +21,11 @@ function App() {
         <Route path="/reviews/:id" element={<Review />} />
         <Route path="/event-page/:id" element={<EventPage />} />
         <Route path="/signup/:id" element={<UserDetails />} />
+        <Route path="/my-events" element={<MyEventPage />} />
       </Routes>
     </BrowserRouter>
-  );
+    <Footer />
+  </>);
 }
 
 export default App;

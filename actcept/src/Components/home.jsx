@@ -11,7 +11,7 @@ const Home = () => {
 
     return (<>
         <div class="heroHeader">
-            <img src="./Assets/Images/ActCept_Logo.png" alt="..." height="120px" />
+            <img id="heroImage" src="./Assets/Images/ActCept_Logo.png" alt="..."/>
             <br/>
             <br/>
             <p id="heroSubtitle"> See through the crowd and find your perfect event</p>
@@ -19,9 +19,6 @@ const Home = () => {
         <div>
             <Filtering events={events}/>
         </div>
-        <footer class="footer">
-            <img src="./Assets/Images/ActCept_Logo.png" alt="..." height="50px" />
-        </footer>
     </>)
 
 }
